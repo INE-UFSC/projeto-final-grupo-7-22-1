@@ -1,6 +1,7 @@
 
 
-from Plataform import Plataform, PLATAFORM_TYPE
+from Plataform import PLATAFORM_TYPE
+from BasicPlataform import BasicPlataform
 
 
 class Region:
@@ -24,8 +25,8 @@ class Region:
         for line in self.__layout:
             ypos += 100
             temp_plat = []
-            for xpos in line:
-                temp_plat.append(Plataform((width*(xpos/100), ypos),(100,50), PLATAFORM_TYPE.BASIC, 'plataform.png'))
+            for xpos in line.split(sep=','):
+                temp_plat.append(BasicPlataform((width*(int(xpos)/100), ypos),(100,50), PLATAFORM_TYPE.BASIC, 'plataform.png'))
             self.plataforms.append(temp_plat)
     
     def update_region(self, vy):
