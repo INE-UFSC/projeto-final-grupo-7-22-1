@@ -1,5 +1,3 @@
-
-
 from Actor import Actor
 
 
@@ -9,25 +7,25 @@ class Character(Actor):
 
         self.__gravity = 0.5
         self.__jump_force = 0.0
-    
+
     @property
     def gravity(self):
         return self.__gravity
-    
+
     @gravity.setter
     def gravity(self, gravity):
         self.__gravity = gravity
-    
+
     def update_movement(self, dir: str):
-        if dir == 'r':
+        if dir == "r":
             self.vx = 20
-        elif dir == 'l':
+        elif dir == "l":
             self.vx = -20
-        elif dir == 's':
+        elif dir == "s":
             self.vx = 0
         else:
             print("Direction parameter must be 'r', 'l' or 's'")
-    
+
     def jump(self):
         self.vy -= 50
 
@@ -38,4 +36,7 @@ class Character(Actor):
         self.x += self.vx
         self.y += self.vy
         self.rect.move_ip(self.vx, self.vy)
-    
+
+    def stop(self):
+        self.velx = 0
+        self.vely = 0
