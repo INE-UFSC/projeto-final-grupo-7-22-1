@@ -27,6 +27,5 @@ while True:
 
     controller.update_char()
     world.update_world()
-    world.player.fall()
     world.draw_world()
     pygame.display.update()

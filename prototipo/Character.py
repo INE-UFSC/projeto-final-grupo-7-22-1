@@ -27,7 +27,7 @@ class Character(Actor):
             print("Direction parameter must be 'r', 'l' or 's'")
 
     def jump(self):
-        self.vy -= 50
+        self.vy -= 5
 
     def fall(self):
         self.vy += self.gravity
@@ -38,5 +38,5 @@ class Character(Actor):
         self.rect.move_ip(self.vx, self.vy)
 
     def stop(self):
-        self.velx = 0
-        self.vely = 0
+        self.vx = 0
+        self.vy = 0

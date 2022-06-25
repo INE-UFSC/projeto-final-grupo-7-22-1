@@ -3,6 +3,7 @@ import os.path
 import pygame
 from Character import Character
 from Region import Region
+from Collision import Collision
 
 class World:
     def __init__(self, width: int, height: int):
@@ -10,6 +11,7 @@ class World:
         self.__dimension = (width,height)
         self.__player = Character((400,100), (100,100), 'hitbox.png')
         self.__regions = []
+        self.__col_module = Collision()
 
         self.__init_regions()
 
@@ -34,10 +36,17 @@ class World:
             self.regions.append(Region(os.path.join('prototipo/assets','preset1.txt'), self.dimension[0], self.dimension[1], -i*self.dimension[1]))
     
     def update_world(self):
-        self.player.move()
         
         for region in self.regions:
+            for step in region.plataforms:
+                for plataform in step:
+                    if self.__col_module.Hit(self.player, pygame.sprite.Group(plataform)):
+                        #print(f"{self.player} collided with {plataform}")
+                        self.player.stop()
             region.update_region(5)
+
+        self.player.fall()
+        self.player.move()
     
     def draw_world(self):
         self.screen.fill('white')

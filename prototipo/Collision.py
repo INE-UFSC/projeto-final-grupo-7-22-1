@@ -9,11 +9,11 @@ class Collision:
     def __init__(self):
         self.x_modificador = -15
 
-    def Hit(self, Player, Objects):
-        Hit_Boolean = pygame.sprite.spritecollide(Player, Objects, False)
+    def Hit(self, player, object):
+        Hit_Boolean = pygame.sprite.spritecollide(player, object, False)
         return Hit_Boolean
 
-    def Update_Hit(self, Player, Objects):
-        HitVar = self.Hit(Player, Objects)
+    def Update_Hit(self, player, objects):
+        HitVar = self.Hit(player, objects)
         if HitVar:
-            Player.stop()
+            player.stop()
