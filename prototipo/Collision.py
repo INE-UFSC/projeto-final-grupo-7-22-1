@@ -11,9 +11,17 @@ class Collision:
 
     def Hit(self, player, object):
         Hit_Boolean = pygame.sprite.spritecollide(player, object, False)
-        return Hit_Boolean
+        if Hit_Boolean != []:
+            return Hit_Boolean[0]
+        else:
+            return False
 
-    def Update_Hit(self, player, objects):
-        HitVar = self.Hit(player, objects)
+    def Update_Hit(self, player, object):
+        HitVar = object
         if HitVar:
-            player.stop()
+            if (player.y < HitVar.y < player.y + player.height and
+                (HitVar.x < player.x < HitVar.x + HitVar.width or
+                HitVar.x < player.x + player.width < HitVar.x + HitVar.width)):
+                if player.vy >= 0:
+                    return True
+        return False

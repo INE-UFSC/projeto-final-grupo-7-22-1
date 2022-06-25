@@ -27,9 +27,9 @@ class Character(Actor):
 
     def update_movement(self, dir: str):
         if dir == "r":
-            self.vx = 20
+            self.vx = 10
         elif dir == "l":
-            self.vx = -20
+            self.vx = -10
         elif dir == "s":
             self.vx = 0
         else:
