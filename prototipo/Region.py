@@ -23,7 +23,7 @@ class Region:
     def init_plataforms(self, width: int, height: int):
         ypos = self.offset
         for line in self.__layout:
-            ypos += 100
+            ypos -= 150
             temp_plat = []
             for xpos in line.split(sep=','):
                 temp_plat.append(BasicPlataform((width*(int(xpos)/100), ypos),(100,50), PLATAFORM_TYPE.BASIC, 'plataform.png'))

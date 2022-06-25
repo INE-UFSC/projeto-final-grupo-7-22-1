@@ -14,7 +14,7 @@ class Actor(ABC, pygame.sprite.Sprite):
         self.__x = pos[0]
         self.__y = pos[1]
         self.__width = size[0]
-        self.__heigth = size[1]
+        self.__height = size[1]
         self.__vx = 0 
         self.__vy = 0
 
@@ -22,6 +22,8 @@ class Actor(ABC, pygame.sprite.Sprite):
         self.__image = pygame.image.load(os.path.join('prototipo/assets',img_path))
         self.__rect = self.image.get_rect()
         self.__rect.move_ip(*pos)
+
+        self.__width, self.__height = self.__image.get_size()
 
     @property
     def x(self):
@@ -38,6 +40,14 @@ class Actor(ABC, pygame.sprite.Sprite):
     @y.setter
     def y(self, y):
         self.__y = y
+
+    @property
+    def width(self):
+        return self.__width
+
+    @property
+    def height(self):
+        return self.__height
 
     @property
     def vx(self):
