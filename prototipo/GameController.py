@@ -35,6 +35,7 @@ class GameController:
             if self.world.check_defeat_conditions():
                 self.world.reset()
                 self.controller.char = self.world.player
+                self.FPS = 60
 
             self.controller.update_char()
             self.world.update_world()
