@@ -1,3 +1,16 @@
-Nesse diretório, o grupo irá trabalhar em cima do primeiro protótipo do jogo.
+# Jumper King
+Jogo de plataforma 2D no estilo highest score
 
-A ideia do protótipo não é que ele seja uma versão demo do jogo completo, mas sim que o principal mecanismo do jogo esteja implementado com certo grau de sucesso. Exemplo: em um jogo do tipo plataforma 2D, basta mostrar um retângulo colidindo com objetos e saltando/destruindo com alguma comando do usuário. A interface gráfica (com sprites) é opcional nessa etapa.
+## Objetivos:
+Obter a maior pontuação ao escalar as plataformas
+
+## Condição de derrota:
+Se o jogador ficar muito abaixo da tela o jogo é reiniciado diretamente.
+(Não há implementação de uma tela de game over)
+
+## Intruções para jogar
+Rodar o jogo a partir do arquivo app.py
+
+Requisitos:
+- Python 3.8 ou acima
+- Pygame
