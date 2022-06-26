@@ -54,10 +54,10 @@ class Character(Actor):
     def move(self):
         self.x += self.vx
         self.y += self.vy
-        self.rect.move_ip(self.vx, self.vy)
+        self.rect.update(self.x, self.y, self.width, self.height)
 
     # Movimento externo do char, acessivel pela classe world
     def set_pos(self, vx, vy):
         self.x += vx
         self.y += vy
-        self.rect.move_ip(vx, vy)
+        self.rect.update(self.x, self.y, self.width, self.height)
