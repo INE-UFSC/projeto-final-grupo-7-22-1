@@ -19,7 +19,7 @@ class Actor(ABC, pygame.sprite.Sprite):
         self.__vy = 0
 
         #Rectangle representation
-        self.__image = pygame.image.load(os.path.join('prototipo/assets',img_path))
+        self.__image = pygame.image.load(os.path.join("prototipo", "assets",img_path))
         self.__rect = self.image.get_rect()
         self.__rect.move_ip(*pos)
 

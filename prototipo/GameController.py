@@ -8,7 +8,6 @@ from BasicPlataform import BasicPlataform
 from World import World
 
 
-FPS = 60
 
 
 class GameController:
@@ -18,10 +17,13 @@ class GameController:
         self.__world = World(width, height)
         self.__controller = PlayerCharacter(self.__world.player)
         self.__clock = pygame.time.Clock()
+        self.FPS = 60
 
     def game_loop(self):
         while True:
-            self.__clock.tick(FPS)
+            self.__clock.tick(self.FPS)
+            self.FPS += 0.01
+
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.display.quit()

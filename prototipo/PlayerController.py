@@ -49,6 +49,5 @@ class PlayerCharacter:
             self.char.update_movement('s')
 
         if self.keyboard['space'] == True:
-            self.char.increase_jump_force()
             self.char.jump()
         

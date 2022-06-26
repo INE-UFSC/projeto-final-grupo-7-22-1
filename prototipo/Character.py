@@ -25,6 +25,7 @@ class Character(Actor):
     def hasCollided(self, cond):
         self.__hasCollided = cond
 
+    # Atualiza vetor x do char dependendo da direcao parada 
     def update_movement(self, dir: str):
         if dir == "r":
             self.vx = 10
@@ -35,23 +36,27 @@ class Character(Actor):
         else:
             print("Direction parameter must be 'r', 'l' or 's'")
 
+    # Nao inplementado
     def increase_jump_force(self):
         if self.__jump_force < 1:
             self.__jump_force += 0.01
 
+    # Aumenta vetor y do char
     def jump(self):
         if self.hasCollided:
             self.vy -= 50 * 0.3
-        self.__jump_force = 0.3
 
+    # Atualiza velocidade de queda
     def fall(self):
         self.vy += self.gravity
 
+    # Movimento interno do char
     def move(self):
         self.x += self.vx
         self.y += self.vy
         self.rect.move_ip(self.vx, self.vy)
 
+    # Movimento externo do char, acessivel pela classe world
     def set_pos(self, vx, vy):
         self.x += vx
         self.y += vy

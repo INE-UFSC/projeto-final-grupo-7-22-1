@@ -39,31 +39,38 @@ class World:
     def __init_regions(self):
         for i in range(1,-3,-1):
             j = randint(1,1)
-            self.regions.append(Region(os.path.join('prototipo/assets',
+            self.regions.append(Region(os.path.join("prototipo", "assets",
                                 f"preset{j}.txt"), self.dimension[0], 
                                 self.dimension[1], i*self.dimension[1]))
     
     def update_world(self):
-        #self.__world_vel = self.__world_vel+0.01
         
+        # Acelera tela se jogador estiver muito perto do topo
+        if self.player.y < 50:
+            self.__world_vel += 1
+        else:
+            self.__world_vel = 2
+
+        # Atualiza posicao das regioes
         self.__update_regions()
 
-        #Update player position
+        # Atualiza posicao do player
         self.player.set_pos(0, self.__world_vel)
+        # Se player nao esta numa plataforma
         if not self.player.hasCollided:
-            self.player.fall()
-        self.player.move()
+            self.player.fall() # Atualiza velocidade de queda
+        self.player.move() # Move player
 
-        #Check collisions
+        #Verifica colisao
         hit = self.__check_collisions()
         if  hit == False:
-            self.player.hasCollided = False
+            self.player.hasCollided = False # Se nao ocorrer jogador nao colide
         else:
-            self.player.hasCollided = True
-            #self.player.set_pos(0, -self.player.vy)
-            self.player.set_pos(0, -((self.player.y + self.player.height) - hit.y))
-            self.player.vy = 0
+            self.player.hasCollided = True # Se ocorrer jogador colidiu
+            self.player.set_pos(0, -((self.player.y + self.player.height) - hit.y)) #Posiciona jogador acima da plataforma
+            self.player.vy = 0 # Zera velocidade y do jogador
 
+        #Impede jogador de sair para a esquerda ou direita da tela
         if self.player.x >= self.dimension[0]:
             self.player.set_pos(-self.player.vx, 0)
             self.player.update_movement('s')
@@ -71,6 +78,7 @@ class World:
             self. player.set_pos(-self.player.vx, 0)
             self.player.update_movement('s')
     
+    # Desenha mundo
     def draw_world(self):
         self.screen.fill('white')
         for region in self.regions:
@@ -79,6 +87,8 @@ class World:
                     self.screen.blit(plataform.image, plataform.rect)
         self.screen.blit(self.player.image, self.player.rect)
     
+    # Verifica colisao para cada plataforma
+    # Retorna plataforma se ocorrer colisão 
     def __check_collisions(self):
         for region in self.regions:
             for step in region.plataforms:
