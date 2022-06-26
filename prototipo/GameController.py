@@ -31,8 +31,20 @@ class GameController:
                     exit()
                 elif event.type == pygame.KEYDOWN or event.type == pygame.KEYUP:
                     self.__controller.update_keyboard(event)
+            
+            if self.world.check_defeat_conditions():
+                self.world.reset()
+                self.controller.char = self.world.player
 
-            self.__controller.update_char()
-            self.__world.update_world()
-            self.__world.draw_world()
+            self.controller.update_char()
+            self.world.update_world()
+            self.world.draw_world()
             pygame.display.update()
+
+    @property
+    def world(self):
+        return self.__world
+    
+    @property
+    def controller(self):
+        return self.__controller

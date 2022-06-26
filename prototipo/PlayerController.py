@@ -15,6 +15,10 @@ class PlayerCharacter:
     @property
     def char(self):
         return self.__char
+
+    @char.setter
+    def char(self, char: Character):
+        self.__char = char
     
     @property
     def keyboard(self):

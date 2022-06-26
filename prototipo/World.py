@@ -12,13 +12,13 @@ class World:
     def __init__(self, width: int, height: int):
         self.__screen = pygame.display.set_mode((width, height))
         self.__dimension = (width,height)
-        self.__player = Character((400,100), (100,100), 'hitbox.png')
-        self.__regions = []
+
         self.__col_module = Collision()
         self.__world_vel = 2.0
 
-        self.i = 0
+        self.__init_player()
         self.__init_regions()
+
 
     @property
     def screen(self):
@@ -36,9 +36,13 @@ class World:
     def player(self):
         return self.__player
 
+    def __init_player(self):
+        self.__player = Character((400,100), (100,100), 'hitbox.png')
+
     def __init_regions(self):
+        self.__regions = []
         for i in range(1,-3,-1):
-            j = randint(1,1)
+            j = randint(1,2)
             self.regions.append(Region(os.path.join("prototipo", "assets",
                                 f"preset{j}.txt"), self.dimension[0], 
                                 self.dimension[1], i*self.dimension[1]))
@@ -104,7 +108,16 @@ class World:
             region.update_region(self.__world_vel)
         if self.regions[0].offset > 2*self.dimension[1]:
             self.regions.pop(0)
-            j = randint(1,1)
+            j = randint(1,2)
             self.regions.append(Region(os.path.join("prototipo", "assets",
                                 f"preset{j}.txt"), self.dimension[0], 
                                 self.dimension[1], self.regions[-1].offset-self.dimension[1]))
+    
+    def check_defeat_conditions(self):
+        if self.player.y > self.dimension[1] * 1.5:
+            return True
+        return False
+    
+    def reset(self):
+        self.__init_regions()
+        self.__init_player()
