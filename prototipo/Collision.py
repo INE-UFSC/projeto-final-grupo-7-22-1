@@ -18,10 +18,10 @@ class Collision:
 
     def Update_Hit(self, player, object):
         HitVar = object
-        #Checa 
-        if (player.y < HitVar.y < player.y + player.height and
-            (HitVar.x < player.x < HitVar.x + HitVar.width or
-            HitVar.x < player.x + player.width < HitVar.x + HitVar.width)):
+        #Checa colisao
+        if (player.y < HitVar.y < player.y + player.height
+            and (HitVar.x < player.x < HitVar.x + HitVar.width
+            or HitVar.x < player.x + player.width < HitVar.x + HitVar.width)):
             if player.vy >= 0:
                 return True
         return False

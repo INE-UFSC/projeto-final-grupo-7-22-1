@@ -8,8 +8,6 @@ from BasicPlataform import BasicPlataform
 from World import World
 
 
-
-
 class GameController:
     def __init__(self, width: int, height: int):
         pygame.init()
@@ -31,17 +29,43 @@ class GameController:
                     exit()
                 elif event.type == pygame.KEYDOWN or event.type == pygame.KEYUP:
                     self.__controller.update_keyboard(event)
-            
+
             if self.world.check_defeat_conditions():
-                self.world.reset()
-                self.controller.char = self.world.player
-                self.FPS = 60
+                self.game_over_loop()
 
             self.controller.update_char()
             self.world.update_world()
             self.world.draw_world()
             pygame.display.update()
 
+    def game_over_loop(self):
+        run = True
+        while run:
+            self.__clock.tick(self.FPS)
+
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.display.quit()
+                    pygame.quit()
+                    exit()
+                elif event.type == pygame.KEYDOWN:
+                        run = False
+                        self.world.reset()
+                        self.controller.char = self.world.player
+                        self.FPS = 60
+
+    def main_menu_loop(self):
+        run = True
+        while run:
+            self.__clock.tick(self.FPS)
+
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.display.quit()
+                    pygame.quit()
+                    exit()
+                elif event.type == pygame.KEYDOWN:
+                    self.game_loop()
     @property
     def world(self):
         return self.__world

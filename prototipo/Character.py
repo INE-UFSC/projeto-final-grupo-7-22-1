@@ -38,13 +38,17 @@ class Character(Actor):
 
     # Nao inplementado
     def increase_jump_force(self):
-        if self.__jump_force < 1:
-            self.__jump_force += 0.01
+        if self.hasCollided:
+            if self.__jump_force == 0:
+                self.__jump_force = 0.2
+            if self.__jump_force < 0.4:
+                self.__jump_force += 0.01
 
     # Aumenta vetor y do char
     def jump(self):
         if self.hasCollided:
-            self.vy -= 50 * 0.3
+            self.vy -= 50 * self.__jump_force
+            self.__jump_force = 0
 
     # Atualiza velocidade de queda
     def fall(self):
