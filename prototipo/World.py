@@ -109,9 +109,7 @@ class World:
         if self.regions[0].offset > 2*self.dimension[1]:
             self.regions.pop(0)
             j = randint(1,2)
-            self.regions.append(Region(os.path.join(self.__PathBase.assets,
-                                f"preset{j}.txt"), self.dimension[0], 
-                                self.dimension[1], self.regions[-1].offset-self.dimension[1]))
+            self.regions.append(Region(os.path.join(self.__PathBase.assets, f"preset{j}.txt"), self.dimension[0], self.dimension[1], self.regions[-1].offset-self.dimension[1], self.__PathBase.plataform))
     
     def check_defeat_conditions(self):
         if self.player.y > self.dimension[1] * 1.5:

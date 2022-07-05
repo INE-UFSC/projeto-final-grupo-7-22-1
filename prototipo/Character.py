@@ -40,9 +40,9 @@ class Character(Actor):
     def increase_jump_force(self):
         if self.hasCollided:
             if self.__jump_force == 0:
-                self.__jump_force = 0.2
+                self.__jump_force = 0.1
             if self.__jump_force < 0.4:
-                self.__jump_force += 0.01
+                self.__jump_force += 0.005
 
     # Aumenta vetor y do char
     def jump(self):
