@@ -6,8 +6,9 @@ import pygame
 import os
 
 
+
 class Actor(ABC, pygame.sprite.Sprite):
-    def __init__(self, pos: tuple, size: tuple, img_path: str):
+    def __init__(self, pos: tuple, size: tuple, img: str):
         super().__init__()
         
         #Attributes
@@ -19,7 +20,7 @@ class Actor(ABC, pygame.sprite.Sprite):
         self.__vy = 0
 
         #Rectangle representation
-        self.__image = pygame.image.load(os.path.join("prototipo", "assets",img_path))
+        self.__image = img
         self.__rect = self.image.get_rect()
         self.__rect.move_ip(*pos)
 

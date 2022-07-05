@@ -5,8 +5,8 @@ from Plataform import Plataform, PLATAFORM_TYPE
 
 
 class BasicPlataform(Plataform):
-    def __init__(self, pos: tuple, size: tuple, type: PLATAFORM_TYPE, img_path: str):
-        super().__init__(pos, size, type, img_path)
+    def __init__(self, pos: tuple, size: tuple, type: PLATAFORM_TYPE, img):
+        super().__init__(pos, size, type, img)
 
     def update_movement(self, vx, vy):
         self.vx = vx

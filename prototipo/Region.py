@@ -5,12 +5,12 @@ from BasicPlataform import BasicPlataform
 
 
 class Region:
-    def __init__(self, filepath: str, width: int, height: int, offset: int):
+    def __init__(self, filepath: str, width: int, height: int, offset: int, img):
         self.__layout = open(filepath, 'r').readlines()
         self.__offset = offset
         self.__plataforms = []
 
-        self.init_plataforms(width, height)
+        self.init_plataforms(width, height, img)
 
     @property
     def offset(self):
@@ -24,14 +24,13 @@ class Region:
     def plataforms(self):
         return self.__plataforms
 
-    def init_plataforms(self, width: int, height: int):
+    def init_plataforms(self, width: int, height: int, img):
         ypos = self.offset
-        
         for line in self.__layout:
             ypos += 150
             temp_plat = []
             for xpos in line.split(sep=','):
-                temp_plat.append(BasicPlataform((width*(int(xpos)/100), ypos),(100,50), PLATAFORM_TYPE.BASIC, 'plataform.png'))
+                temp_plat.append(BasicPlataform((width*(int(xpos)/100), ypos),(100,50), PLATAFORM_TYPE.BASIC, img))
             self.plataforms.append(temp_plat)
     
     def update_region(self, vy):

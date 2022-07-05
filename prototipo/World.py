@@ -5,14 +5,14 @@ from Character import Character
 from Region import Region
 from Collision import Collision
 from random import randint
-from math import sqrt
+from SpriteSingleton import Sprite_Singleton
 
 
 class World:
     def __init__(self, width: int, height: int):
         self.__screen = pygame.display.set_mode((width, height))
         self.__dimension = (width,height)
-
+        self.__PathBase = Sprite_Singleton()
         self.__col_module = Collision()
         self.__world_vel = 2.0
 
@@ -37,15 +37,15 @@ class World:
         return self.__player
 
     def __init_player(self):
-        self.__player = Character((400,100), (100,100), 'hitbox.png')
+        self.__player = Character((400,100), (100,100), self.__PathBase.player)
 
     def __init_regions(self):
         self.__regions = []
         for i in range(1,-3,-1):
             j = randint(1,2)
-            self.regions.append(Region(os.path.join("prototipo", "assets",
+            self.regions.append(Region(os.path.join(self.__PathBase.assets,
                                 f"preset{j}.txt"), self.dimension[0], 
-                                self.dimension[1], i*self.dimension[1]))
+                                self.dimension[1], i*self.dimension[1], self.__PathBase.plataform))
     
     def update_world(self):
         
@@ -109,7 +109,7 @@ class World:
         if self.regions[0].offset > 2*self.dimension[1]:
             self.regions.pop(0)
             j = randint(1,2)
-            self.regions.append(Region(os.path.join("prototipo", "assets",
+            self.regions.append(Region(os.path.join(self.__PathBase.assets,
                                 f"preset{j}.txt"), self.dimension[0], 
                                 self.dimension[1], self.regions[-1].offset-self.dimension[1]))
     

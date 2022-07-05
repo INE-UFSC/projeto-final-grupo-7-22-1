@@ -2,8 +2,8 @@ from Actor import Actor
 
 
 class Character(Actor):
-    def __init__(self, pos: tuple, size: tuple, img_path: str):
-        super().__init__(pos, size, img_path)
+    def __init__(self, pos: tuple, size: tuple, img):
+        super().__init__(pos, size, img)
 
         self.__hasCollided = False
         self.__gravity = 0.5
