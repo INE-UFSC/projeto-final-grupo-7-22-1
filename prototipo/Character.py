@@ -40,7 +40,7 @@ class Character(Actor):
     def increase_jump_force(self):
         if self.hasCollided:
             if self.__jump_force == 0:
-                self.__jump_force = 0.1
+                self.__jump_force = 0.2
             if self.__jump_force < 0.4:
                 self.__jump_force += 0.005
 

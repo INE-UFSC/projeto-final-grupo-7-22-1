@@ -27,7 +27,12 @@ class GameController:
                     pygame.display.quit()
                     pygame.quit()
                     exit()
-                elif event.type == pygame.KEYDOWN or event.type == pygame.KEYUP:
+                elif event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_ESCAPE:
+                        return
+                    else:
+                        self.__controller.update_keyboard(event)
+                elif event.type == pygame.KEYUP:
                     self.__controller.update_keyboard(event)
 
             if self.world.check_defeat_conditions():
@@ -66,6 +71,9 @@ class GameController:
                     exit()
                 elif event.type == pygame.KEYDOWN:
                     self.game_loop()
+            
+            self.world.draw_menu()
+    
     @property
     def world(self):
         return self.__world
