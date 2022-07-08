@@ -6,6 +6,7 @@ from PlayerController import PlayerCharacter
 from Plataform import PLATAFORM_TYPE
 from BasicPlataform import BasicPlataform
 from World import World
+from Draw import Draw
 
 
 class GameController:
@@ -13,6 +14,7 @@ class GameController:
         pygame.init()
 
         self.__world = World(width, height)
+        self.__drawn = Draw(self.__world)
         self.__controller = PlayerCharacter(self.__world.player)
         self.__clock = pygame.time.Clock()
         self.FPS = 60
@@ -40,7 +42,7 @@ class GameController:
 
             self.controller.update_char()
             self.world.update_world()
-            self.world.draw_world()
+            self.__drawn.draw()
             pygame.display.update()
 
     def game_over_loop(self):
@@ -72,7 +74,7 @@ class GameController:
                 elif event.type == pygame.KEYDOWN:
                     self.game_loop()
             
-            self.world.draw_menu()
+            self.__drawn.draw_menu()
     
     @property
     def world(self):
