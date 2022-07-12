@@ -76,11 +76,11 @@ class World:
             self.player.vy = 0  # Zera velocidade y do jogador
 
         # Impede jogador de sair para a esquerda ou direita da tela
-        if self.player.x >= self.dimension[0]:
-            self.player.set_pos(-self.player.vx, 0)
+        if self.player.x + self.player.width >= self.dimension[0]:
+            self.player.set_pos(self.dimension[0] - (self.player.x + self.player.width), 0)
             self.player.update_movement('s')
         if self.player.x < 0:
-            self. player.set_pos(-self.player.vx, 0)
+            self. player.set_pos(-self.player.x, 0)
             self.player.update_movement('s')
 
     # Desenha mundo
