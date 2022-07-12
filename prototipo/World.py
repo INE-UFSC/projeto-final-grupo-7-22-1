@@ -5,7 +5,7 @@ from Region import Region
 from Collision import Collision
 from random import randint
 from PathSingleton import path_single
-
+from Score import Score
 
 class World:
     def __init__(self, width: int, height: int):
@@ -13,6 +13,7 @@ class World:
         self.__PathBase = path_single
         self.__col_module = Collision()
         self.__world_vel = 2.0
+        self.__score = Score('player')
         self.__init_player()
         self.__init_regions()
 
@@ -27,6 +28,10 @@ class World:
     @property
     def player(self):
         return self.__player
+
+    @property
+    def score(self):
+        return self.__score
 
     def __init_player(self):
         self.__player = Character((400, 100), (100, 100), self.__PathBase.player)
@@ -83,6 +88,9 @@ class World:
         if self.player.x < 0:
             self.player.set_pos(-self.player.x, 0)
             self.player.update_movement("s")
+        
+        self.score.increase_score(1)
+        print(self.score.string())
 
     # Verifica colisao para cada plataforma
     # Retorna plataforma se ocorrer colisão
