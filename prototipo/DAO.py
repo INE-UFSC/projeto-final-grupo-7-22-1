@@ -1,5 +1,3 @@
-
-
 import pickle as pkl
 
 
@@ -14,11 +12,11 @@ class DAO:
             self.__dump()
 
     def __load(self):
-        with open(self.__datasource, 'rb') as file:
+        with open(self.__datasource, "rb") as file:
             self.__object_cache = pkl.load(file)
 
     def __dump(self):
-        with open(self.__datasource, 'rb') as file:
+        with open(self.__datasource, "rb") as file:
             pkl.dump(self.__object_cache, file)
 
     def add(self, key, obj):

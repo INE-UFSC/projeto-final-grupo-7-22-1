@@ -1,5 +1,3 @@
-
-
 import os.path
 import pygame
 from Character import Character
@@ -11,18 +9,12 @@ from PathSingleton import path_single
 
 class World:
     def __init__(self, width: int, height: int):
-        self.__screen = pygame.display.set_mode((width, height))
         self.__dimension = (width, height)
         self.__PathBase = path_single
         self.__col_module = Collision()
         self.__world_vel = 2.0
-
         self.__init_player()
         self.__init_regions()
-
-    @property
-    def screen(self):
-        return self.__screen
 
     @property
     def dimension(self):
@@ -37,16 +29,21 @@ class World:
         return self.__player
 
     def __init_player(self):
-        self.__player = Character((400, 100), (100, 100),
-                                  self.__PathBase.player)
+        self.__player = Character((400, 100), (100, 100), self.__PathBase.player)
 
     def __init_regions(self):
         self.__regions = []
         for i in range(1, -3, -1):
             j = randint(1, 2)
-            self.regions.append(Region(os.path.join(self.__PathBase.assets, f"preset{j}.txt"),
-                                self.dimension[0], self.dimension[1],
-                                i*self.dimension[1], self.__PathBase.plataform))
+            self.regions.append(
+                Region(
+                    os.path.join(self.__PathBase.assets, f"preset{j}.txt"),
+                    self.dimension[0],
+                    self.dimension[1],
+                    i * self.dimension[1],
+                    self.__PathBase.plataform,
+                )
+            )
 
     def update_world(self):
 
@@ -72,28 +69,20 @@ class World:
             self.player.hasCollided = False  # Jogador nao colide
         else:
             self.player.hasCollided = True  # Se ocorrer jogador colidiu
-            self.player.set_pos(0, -((self.player.y + self.player.height) - hit.y))  # Posiciona jogador acima da plataforma
+            self.player.set_pos(
+                0, -((self.player.y + self.player.height) - hit.y)
+            )  # Posiciona jogador acima da plataforma
             self.player.vy = 0  # Zera velocidade y do jogador
 
         # Impede jogador de sair para a esquerda ou direita da tela
         if self.player.x + self.player.width >= self.dimension[0]:
-            self.player.set_pos(self.dimension[0] - (self.player.x + self.player.width), 0)
-            self.player.update_movement('s')
+            self.player.set_pos(
+                self.dimension[0] - (self.player.x + self.player.width), 0
+            )
+            self.player.update_movement("s")
         if self.player.x < 0:
-            self. player.set_pos(-self.player.x, 0)
-            self.player.update_movement('s')
-
-    # Desenha mundo
-    def draw_world(self):
-        self.screen.fill('white')
-        for region in self.regions:
-            for step in region.plataforms:
-                for plataform in step:
-                    self.screen.blit(plataform.image, plataform.rect)
-        self.screen.blit(self.player.image, self.player.rect)
-
-    def draw_menu(self):
-        self.screen.fill('white')
+            self.player.set_pos(-self.player.x, 0)
+            self.player.update_movement("s")
 
     # Verifica colisao para cada plataforma
     # Retorna plataforma se ocorrer colisão
@@ -113,10 +102,15 @@ class World:
         if self.regions[0].offset > 2 * self.dimension[1]:
             self.regions.pop(0)
             j = randint(1, 2)
-            self.regions.append(Region(os.path.join(self.__PathBase.assets, f"preset{j}.txt"),
-                                       self.dimension[0], self.dimension[1],
-                                       self.regions[-1].offset-self.dimension[1],
-                                       self.__PathBase.plataform))
+            self.regions.append(
+                Region(
+                    os.path.join(self.__PathBase.assets, f"preset{j}.txt"),
+                    self.dimension[0],
+                    self.dimension[1],
+                    self.regions[-1].offset - self.dimension[1],
+                    self.__PathBase.plataform,
+                )
+            )
 
     def check_defeat_conditions(self):
         if self.player.y > self.dimension[1] * 1.5:

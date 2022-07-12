@@ -1,5 +1,3 @@
-        
-
 import pygame
 from Character import Character
 from PlayerController import PlayerCharacter
@@ -12,9 +10,8 @@ from Draw import Draw
 class GameController:
     def __init__(self, width: int, height: int):
         pygame.init()
-
         self.__world = World(width, height)
-        self.__drawn = Draw(self.__world)
+        self.__drawn = Draw(self.__world, width, height)
         self.__controller = PlayerCharacter(self.__world.player)
         self.__clock = pygame.time.Clock()
         self.FPS = 60
@@ -56,10 +53,10 @@ class GameController:
                     pygame.quit()
                     exit()
                 elif event.type == pygame.KEYDOWN:
-                        run = False
-                        self.world.reset()
-                        self.controller.char = self.world.player
-                        self.FPS = 60
+                    run = False
+                    self.world.reset()
+                    self.controller.char = self.world.player
+                    self.FPS = 60
 
     def main_menu_loop(self):
         run = True
@@ -73,13 +70,13 @@ class GameController:
                     exit()
                 elif event.type == pygame.KEYDOWN:
                     self.game_loop()
-            
+
             self.__drawn.draw_menu()
-    
+
     @property
     def world(self):
         return self.__world
-    
+
     @property
     def controller(self):
         return self.__controller
