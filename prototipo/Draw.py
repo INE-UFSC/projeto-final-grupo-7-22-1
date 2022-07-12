@@ -1,11 +1,13 @@
 from World import World
 import pygame
+from Menu import Menu
 
 
 class Draw:
     def __init__(self, object_world, width, height):
         self.__object_world = object_world
         self.__screen = pygame.display.set_mode((width, height))
+        self.__menu = Menu(height, width)
         ### object_menu
 
     def draw(self):
@@ -20,5 +22,5 @@ class Draw:
             )
 
     def draw_menu(self):
-        if isinstance(self.__object_world, World):
-            self.__screen.fill("white")
+        self.__screen.fill("white")
+        self.__screen.blit(self.__menu.button.image, self.__menu.button.rect)

@@ -61,8 +61,9 @@ class GameController:
     def main_menu_loop(self):
         run = True
         while run:
+            self.__drawn.draw_menu()
             self.__clock.tick(self.FPS)
-
+            pygame.display.update()
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     pygame.display.quit()
@@ -70,8 +71,6 @@ class GameController:
                     exit()
                 elif event.type == pygame.KEYDOWN:
                     self.game_loop()
-
-            self.__drawn.draw_menu()
 
     @property
     def world(self):
