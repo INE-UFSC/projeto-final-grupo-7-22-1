@@ -21,8 +21,8 @@ class Drawer:
 
     def draw_menu(self):
         self.__screen.fill("white")
-        self.draw_menu(self.__menu.button)
-        self.draw_menu(self.__menu.score)
+        self.draw_button(self.__menu.button)
+        self.draw_button(self.__menu.score)
 
         
     def draw_button(self, button):
