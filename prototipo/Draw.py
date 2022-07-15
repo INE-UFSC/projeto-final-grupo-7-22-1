@@ -3,7 +3,7 @@ from Menu import Menu
 
 
 class Drawer:
-    def __init__(self, object_world, object_menu,object_screen):
+    def __init__(self, object_world, object_menu, object_screen):
         self.__object_world = object_world
         self.__screen = object_screen
         self.__menu = object_menu
