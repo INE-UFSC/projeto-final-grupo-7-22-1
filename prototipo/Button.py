@@ -15,19 +15,15 @@ class Button:
         self.rect = self.image.get_rect(center=(self.x_pos, self.y_pos))
         self.text_rect = self.text.get_rect(center=(self.x_pos, self.y_pos))
 
-    def update(self, screen):
-        if self.image is not None:
-            screen.blit(self.image, self.rect)
-        screen.blit(self.text, self.text_rect)
 
-    def checkForInput(self, position):
+    def check_For_Input(self, position):
         if position[0] in range(self.rect.left, self.rect.right) and position[
             1
         ] in range(self.rect.top, self.rect.bottom):
             return True
         return False
 
-    def changeColor(self, position):
+    def change_Color(self, position):
         if position[0] in range(self.rect.left, self.rect.right) and position[
             1
         ] in range(self.rect.top, self.rect.bottom):

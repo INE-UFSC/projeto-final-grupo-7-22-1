@@ -10,8 +10,16 @@ class Menu:
         pygame.font.init()
         self.__button = Button(
             path_single.plataform,
-            [height / 2, width / 2],
+            [height / 4, width / 2],
             "START",
+            pygame.font.Font(pygame.font.get_default_font(), 50),
+            pygame.Color(252, 233, 79),
+            pygame.Color(237, 212, 0),
+        )
+        self.__Score_Button = Button(
+            path_single.plataform,
+            [height / 4, width / 1.7],
+            "SCORE",
             pygame.font.Font(pygame.font.get_default_font(), 50),
             pygame.Color(252, 233, 79),
             pygame.Color(237, 212, 0),
@@ -20,8 +28,14 @@ class Menu:
     def return_button(self):
         return self.__button
 
-    button = property(fget=return_button)
+    def return_score(self):
+        return self.__Score_Button
 
+    def update(self):
+        pass
+
+    button = property(fget=return_button)
+    score = property(fget=return_score)
 
 ###---------TODO----------------###
 

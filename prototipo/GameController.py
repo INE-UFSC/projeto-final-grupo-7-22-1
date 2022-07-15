@@ -4,14 +4,14 @@ from PlayerController import PlayerCharacter
 from Plataform import PLATAFORM_TYPE
 from BasicPlataform import BasicPlataform
 from World import World
-from Draw import Draw
+from Draw import Drawer
 
 
 class GameController:
     def __init__(self, width: int, height: int):
         pygame.init()
         self.__world = World(width, height)
-        self.__drawn = Draw(self.__world, width, height)
+        self.__drawn = Drawer(self.__world, width, height)
         self.__controller = PlayerCharacter(self.__world.player)
         self.__clock = pygame.time.Clock()
         self.FPS = 60
