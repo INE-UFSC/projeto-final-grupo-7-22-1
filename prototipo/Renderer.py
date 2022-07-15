@@ -2,7 +2,7 @@ import pygame
 from Menu import Menu
 
 
-class Drawer:
+class Renderer:
     def __init__(self, object_world, object_menu, object_screen):
         self.__object_world = object_world
         self.__screen = object_screen

@@ -4,7 +4,7 @@ from PlayerController import PlayerCharacter
 from Plataform import PLATAFORM_TYPE
 from BasicPlataform import BasicPlataform
 from World import World
-from Draw import Drawer
+from Renderer import Renderer
 from Menu import Menu
 
 
@@ -14,7 +14,7 @@ class GameController:
         self.__world = World(width, height)
         self.__menu = Menu(height, width)
         self.__screen = pygame.display.set_mode((width, height))
-        self.__drawn = Drawer(self.__world, self.__menu, self.__screen)
+        self.__renderer = Renderer(self.__world, self.__menu, self.__screen)
         self.__controller = PlayerCharacter(self.__world.player)
         self.__clock = pygame.time.Clock()
         self.FPS = 60
@@ -42,7 +42,7 @@ class GameController:
 
             self.controller.update_char()
             self.world.update_world()
-            self.__drawn.draw()
+            self.__renderer.draw()
             pygame.display.update()
 
     def game_over_loop(self):
@@ -64,7 +64,7 @@ class GameController:
     def main_menu_loop(self):
         run = True
         while run:
-            self.__drawn.draw_menu()
+            self.__renderer.draw_menu()
             self.__clock.tick(self.FPS)
             pygame.display.update()
             for event in pygame.event.get():
