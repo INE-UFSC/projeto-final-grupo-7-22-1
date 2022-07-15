@@ -1,14 +1,17 @@
 from Actor import Actor
 
 
+# Class Character implements especialization from actor to a character controlled by the player 
 class Character(Actor):
     def __init__(self, pos: tuple, size: tuple, img):
         super().__init__(pos, size, img)
 
-        self.__hasCollided = False
-        self.__gravity = 0.5
-        self.__jump_force = 0.0
+        #Attributes
+        self.__hasCollided = False # True if character has collided with any other object
+        self.__gravity = 0.5 # Gravity acceleration
+        self.__jump_strengh = 0.0 # Percentage of total jump strengh
 
+    #Getters and Setters
     @property
     def gravity(self):
         return self.__gravity
@@ -18,6 +21,14 @@ class Character(Actor):
         self.__gravity = gravity
 
     @property
+    def jump_strengh(self):
+        return self.__jump_strengh
+
+    @jump_strengh.setter
+    def jump_strengh(self, jump_strengh):
+        self.__jump_strengh = jump_strengh
+
+    @property
     def hasCollided(self):
         return self.__hasCollided
 
@@ -25,7 +36,7 @@ class Character(Actor):
     def hasCollided(self, cond):
         self.__hasCollided = cond
 
-    # Atualiza vetor x do char dependendo da direcao parada 
+    # Updates vector x depending on given direction 
     def update_movement(self, dir: str):
         if dir == "r":
             self.vx = 10
@@ -36,31 +47,32 @@ class Character(Actor):
         else:
             print("Direction parameter must be 'r', 'l' or 's'")
 
-    # Nao inplementado
+    # Increase strengh of jump
     def increase_jump_force(self):
         if self.hasCollided:
-            if self.__jump_force == 0:
-                self.__jump_force = 0.2
-            if self.__jump_force < 0.4:
-                self.__jump_force += 0.005
+            if self.jump_strengh == 0:
+                self.jump_strengh = 0.2
+            if self.jump_strengh < 0.4:
+                self.jump_strengh += 0.005
 
-    # Aumenta vetor y do char
+    # Increases vector y according to jump strengh
     def jump(self):
         if self.hasCollided:
-            self.vy -= 50 * self.__jump_force
-            self.__jump_force = 0
+            self.vy -= 50 * self.jump_strengh
+            self.jump_strengh = 0
 
-    # Atualiza velocidade de queda
+    # Updates fall speed
     def fall(self):
         self.vy += self.gravity
 
-    # Movimento interno do char
+    # Moves character position using internal vectors
     def move(self):
         self.x += self.vx
         self.y += self.vy
         self.rect.update(self.x, self.y, self.width, self.height)
 
-    # Movimento externo do char, acessivel pela classe world
+    # Moves character position using given vectors
+    # Used to offset character in collisions
     def set_pos(self, vx, vy):
         self.x += vx
         self.y += vy

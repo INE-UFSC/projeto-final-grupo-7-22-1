@@ -3,29 +3,33 @@
 from abc import ABC
 from abc import abstractmethod
 import pygame
-import os
 
 
-
+#Class actor abstracts implementation of any physical object in the world
+#Inherits pygame Sprite class
 class Actor(ABC, pygame.sprite.Sprite):
     def __init__(self, pos: tuple, size: tuple, img: str):
         super().__init__()
         
-        #Attributes
+        # Attributes
+        # Position (x, y)
         self.__x = pos[0]
         self.__y = pos[1]
+        # Size
         self.__width = size[0]
         self.__height = size[1]
+        # Velocity vectors (x, y)
         self.__vx = 0 
         self.__vy = 0
 
         #Rectangle representation
-        self.__image = img
-        self.__rect = self.image.get_rect()
-        self.__rect.move_ip(*pos)
+        self.__image = img # Sprite Image
+        self.__rect = self.image.get_rect() #Pygame rect object generated from sprite
+        self.__rect.move_ip(*pos) # Sets intial position of rect
 
-        self.__width, self.__height = self.__image.get_size()
+        self.__width, self.__height = self.__image.get_size() # Set size according to sprite dimension
 
+    # Getters and Setters
     @property
     def x(self):
         return self.__x
@@ -74,10 +78,12 @@ class Actor(ABC, pygame.sprite.Sprite):
     def rect(self):
         return self.__rect
 
+    # Updates position
     @abstractmethod
     def move(self):
         pass
 
+    # Updates velocity vectors
     @abstractmethod
     def update_movement(self):
         pass
