@@ -3,10 +3,10 @@ from Menu import Menu
 
 
 class Drawer:
-    def __init__(self, object_world, width, height):
+    def __init__(self, object_world, object_menu,object_screen):
         self.__object_world = object_world
-        self.__screen = pygame.display.set_mode((width, height))
-        self.__menu = Menu(height, width)
+        self.__screen = object_screen
+        self.__menu = object_menu
         ### object_menu
 
     def draw(self):
