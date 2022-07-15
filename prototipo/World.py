@@ -80,7 +80,7 @@ class World:
         # Check if new region is necessary
         if self.regions[0].offset > 2 * self.dimension[1]:
             self.regions.pop(0)
-            j = randint(1, 2)
+            j = randint(1, 4)
             self.regions.append(
                 Region(
                     os.path.join(path_single.assets, f"preset{j}.txt"),
