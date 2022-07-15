@@ -2,11 +2,11 @@ from Button import Button
 from PathSingleton import path_single
 import pygame
 
+from Menu_States import Menu_States
+
 
 class Menu:
     def __init__(self, height, width):
-        self.__height: height
-        self.__width: width
         pygame.font.init()
         self.__button = Button(
             path_single.plataform,
@@ -24,6 +24,7 @@ class Menu:
             pygame.Color(252, 233, 79),
             pygame.Color(237, 212, 0),
         )
+        self.__states = Menu_States(self)
 
     def return_button(self):
         return self.__button
