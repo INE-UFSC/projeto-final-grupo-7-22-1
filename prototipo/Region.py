@@ -8,7 +8,7 @@ class Region:
     def __init__(self, filepath: str, width: int, height: int, offset: int, img):
         self.__layout = open(filepath, 'r').readlines()
         self.__offset = offset
-        self.__plataforms = []
+        self.__objects = []
 
         self.init_plataforms(width, height, img)
 
@@ -21,8 +21,8 @@ class Region:
         self.__offset = offset
 
     @property
-    def plataforms(self):
-        return self.__plataforms
+    def objects(self):
+        return self.__objects
 
     def init_plataforms(self, width: int, height: int, img):
         ypos = self.offset
@@ -31,11 +31,11 @@ class Region:
             temp_plat = []
             for xpos in line.split(sep=','):
                 temp_plat.append(BasicPlataform((width*(int(xpos)/100), ypos),(100,50), PLATAFORM_TYPE.BASIC, img))
-            self.plataforms.append(temp_plat)
+            self.objects.append(temp_plat)
     
     def update_region(self, vy):
         self.offset += vy
-        for step in self.plataforms:
-            for plataform in step:
-                plataform.update_movement(0, vy)
-                plataform.move()
+        for step in self.objects:
+            for obj in step:
+                obj.update_movement(0, vy)
+                obj.move()
