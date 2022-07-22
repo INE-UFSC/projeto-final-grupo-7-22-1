@@ -1,20 +1,20 @@
 
 
 class Score:
-    def __init__(self, name: str, score = 0):
+    def __init__(self, name: str, points = 0):
         self.__name = name
-        self.__score = score
+        self.__points = points
     
     def string(self):
-        return f"{self.__name}: {self.__score}"
+        return f"{self.__name}: {self.__points}"
 
     @property
     def name(self):
         return self.__name
 
     @property
-    def score(self):
-        return self.__score
+    def points(self):
+        return self.__points
 
     def increase_score(self, inc: int):
-        self.__score += inc
+        self.__points += inc

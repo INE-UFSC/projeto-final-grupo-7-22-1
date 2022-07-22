@@ -7,6 +7,7 @@ class Path_Singleton:
         self.assets = os.path.join(self.resources, "assets")
         self.player = pg.image.load(os.path.join(self.assets, "hitbox.png"))
         self.plataform = pg.image.load(os.path.join(self.assets, "Plataform.png"))
+        self.plataform2 = pg.image.load(os.path.join(self.assets, "Plataform2.png"))
         self.scores = os.path.join(self.resources, "scores", "scores.pkl")
         
 

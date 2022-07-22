@@ -16,7 +16,7 @@ class DAO:
             self.__object_cache = pkl.load(file)
 
     def __dump(self):
-        with open(self.__datasource, "rb") as file:
+        with open(self.__datasource, "wb") as file:
             pkl.dump(self.__object_cache, file)
 
     def add(self, key, obj):

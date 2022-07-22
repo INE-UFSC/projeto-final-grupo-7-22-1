@@ -6,6 +6,7 @@ from Collision import Collision
 from random import randint
 from PathSingleton import path_single
 from Score import Score
+from ScoreDAO import ScoreDAO
 
 class World:
     def __init__(self, width: int, height: int, name = "player"):
@@ -13,6 +14,7 @@ class World:
         self.__col_module = Collision() # Collision Module
         self.__world_vel = 2.0
         self.__score = Score(name) # Active player score
+        self.__scoreDAO = ScoreDAO()
         self.__init_player()
         self.__init_regions()
 
@@ -141,3 +143,4 @@ class World:
     def reset(self):
         self.__init_regions()
         self.__init_player()
+        self.__scoreDAO.add(self.__score)

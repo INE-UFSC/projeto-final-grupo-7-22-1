@@ -1,0 +1,33 @@
+    def update_keyboard(self, event: pygame.event.Event):
+        type = event.type
+        key = event.key
+        if type == KEYDOWN:
+            if key == K_d:
+                return "w"
+            elif key == K_a:
+                return "s"
+            elif key == K_ENTER:
+                return "enter"
+        elif type == KEYUP:
+            return "stay"
+
+    def event_treatment(self, event):
+        if event.type == pygame.QUIT:
+            pygame.display.quit()
+            pygame.quit()
+            exit()
+        elif event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_ESCAPE:
+                return
+            else:
+                player_input = self.update_keyboard(event)
+                if player_input == "enter":
+                    self.Activation()
+                elif player_input == 'w':
+                    self.next_State()
+                elif player_input == 's':
+                    self.previous_State()
+                else:
+                    self.__current_state = self.__current_state
+        else:
+            self.__current_state = self.__current_state

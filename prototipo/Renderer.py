@@ -21,8 +21,9 @@ class Renderer:
 
     def draw_menu(self):
         self.__screen.fill("white")
-        self.draw_button(self.__menu.button)
-        self.draw_button(self.__menu.score)
+        self.draw_button(self.__menu.start_button)
+        self.draw_button(self.__menu.score_button)
+        self.draw_button(self.__menu.quit_button)
 
         
     def draw_button(self, button):

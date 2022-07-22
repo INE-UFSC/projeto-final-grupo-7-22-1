@@ -20,60 +20,85 @@ class GameController:
         self.FPS = 60
 
     def game_loop(self):
-        while True:
-            self.__clock.tick(self.FPS)
-            self.FPS += 0.01
+        
+        self.__clock.tick(self.FPS)
+        self.FPS += 0.01
 
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    pygame.display.quit()
-                    pygame.quit()
-                    exit()
-                elif event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_ESCAPE:
-                        return
-                    else:
-                        self.__controller.update_keyboard(event)
-                elif event.type == pygame.KEYUP:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.display.quit()
+                pygame.quit()
+                exit()
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_ESCAPE:
+                    return "pause"
+                else:
                     self.__controller.update_keyboard(event)
+            elif event.type == pygame.KEYUP:
+                self.__controller.update_keyboard(event)
 
-            if self.world.check_defeat_conditions():
-                self.game_over_loop()
-
-            self.controller.update_char()
-            self.world.update_world()
-            self.__renderer.draw()
-            pygame.display.update()
+        self.controller.update_char()
+        self.world.update_world()
+        self.__renderer.draw()
+        pygame.display.update()
+        if self.world.check_defeat_conditions():
+            return "game-over"
 
     def game_over_loop(self):
-        run = True
-        while run:
-            self.__clock.tick(self.FPS)
+        self.__clock.tick(self.FPS)
 
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    pygame.display.quit()
-                    pygame.quit()
-                    exit()
-                elif event.type == pygame.KEYDOWN:
-                    run = False
-                    self.world.reset()
-                    self.controller.char = self.world.player
-                    self.FPS = 60
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.display.quit()
+                pygame.quit()
+                exit()
+            elif event.type == pygame.KEYDOWN:
+                self.world.reset()
+                self.controller.char = self.world.player
+                self.FPS = 60
+                if event.key == pygame.K_ESCAPE:
+                    return "menu"
+                else:
+                    return "restart"
 
     def main_menu_loop(self):
-        run = True
-        while run:
-            self.__renderer.draw_menu()
-            self.__clock.tick(self.FPS)
-            pygame.display.update()
-            for event in pygame.event.get():
-                if event.type == pygame.QUIT:
-                    pygame.display.quit()
-                    pygame.quit()
-                    exit()
-                elif event.type == pygame.KEYDOWN:
-                    self.game_loop()
+        self.__menu.state_Exec()
+        self.__renderer.draw_menu()
+        self.__clock.tick(self.FPS)
+        pygame.display.update()
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.display.quit()
+                pygame.quit()
+                exit()
+            elif event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_s:
+                    self.__menu.update(1)
+                elif event.key == pygame.K_w:
+                    self.__menu.update(-1)
+                elif event.key == pygame.K_RETURN:
+                    if self.__menu.state == 0:
+                        return "start"
+                    elif self.__menu.state == 1:
+                        return "score"
+                    elif self.__menu.state == 2:
+                        pygame.display.quit()
+                        pygame.quit()
+                        exit()
+                elif type == pygame.KEYUP:
+                    return "stay"
+
+    def score_loop(self):
+        self.__renderer.draw_menu()
+        self.__clock.tick(self.FPS)
+        pygame.display.update()
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.display.quit()
+                pygame.quit()
+                exit()
+            elif event.type == pygame.KEYDOWN:
+                return "menu"
 
     @property
     def world(self):
