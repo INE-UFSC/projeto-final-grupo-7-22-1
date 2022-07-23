@@ -8,16 +8,13 @@ import pygame
 #Class actor abstracts implementation of any physical object in the world
 #Inherits pygame Sprite class
 class Actor(ABC, pygame.sprite.Sprite):
-    def __init__(self, pos: tuple, size: tuple, img: str):
+    def __init__(self, pos: tuple, img: str):
         super().__init__()
         
         # Attributes
         # Position (x, y)
         self.__x = pos[0]
         self.__y = pos[1]
-        # Size
-        self.__width = size[0]
-        self.__height = size[1]
         # Velocity vectors (x, y)
         self.__vx = 0 
         self.__vy = 0

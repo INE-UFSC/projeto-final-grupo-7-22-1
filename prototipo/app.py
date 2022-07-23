@@ -1,4 +1,4 @@
-from Constants import const_single
+from ConstantSingleton import const_single
 from GameController import GameController
 from Menu import Menu
 from Menu_FSM import Menu_FSM

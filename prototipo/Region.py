@@ -30,7 +30,7 @@ class Region:
             ypos += 150
             temp_plat = []
             for xpos in line.split(sep=','):
-                temp_plat.append(BasicPlataform((width*(int(xpos)/100), ypos),(100,50), PLATAFORM_TYPE.BASIC, img))
+                temp_plat.append(BasicPlataform((width*(int(xpos)/100), ypos), PLATAFORM_TYPE.BASIC, img))
             self.objects.append(temp_plat)
     
     def update_region(self, vy):

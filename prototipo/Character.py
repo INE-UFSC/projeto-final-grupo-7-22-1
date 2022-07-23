@@ -3,8 +3,8 @@ from Actor import Actor
 
 # Class Character implements especialization from actor to a character controlled by the player 
 class Character(Actor):
-    def __init__(self, pos: tuple, size: tuple, img):
-        super().__init__(pos, size, img)
+    def __init__(self, pos: tuple, img):
+        super().__init__(pos, img)
 
         #Attributes
         self.__hasCollided = False # True if character has collided with any other object

@@ -5,6 +5,7 @@ from Region import Region
 from Collision import Collision
 from random import randint
 from PathSingleton import path_single
+from ConstantSingleton import const_single
 from Score import Score
 from ScoreDAO import ScoreDAO
 
@@ -12,7 +13,7 @@ class World:
     def __init__(self, width: int, height: int, name = "player"):
         self.__dimension = (width, height) # Screen dimensions
         self.__col_module = Collision() # Collision Module
-        self.__world_vel = 2.0
+        self.__world_vel = const_single.world_vel
         self.__score = Score(name) # Active player score
         self.__scoreDAO = ScoreDAO()
         self.__init_player()
@@ -36,21 +37,26 @@ class World:
 
     # Initializes player
     def __init_player(self):
-        self.__player = Character((self.__dimension[0]/2, self.__dimension[1]/2), (100, 100), path_single.player)
+        self.__player = Character((self.__dimension[0]/2, self.__dimension[1]/2), path_single.player)
 
     # Initializes regions
     def __init_regions(self):
-        self.__regions = []
-        for i in range(1, -3, -1):
-            j = randint(1, 2)
+        self.__regions = [
+                Region(
+                    os.path.join(path_single.assets, "preset1.txt"),
+                    self.dimension[0],
+                    self.dimension[1],
+                    0, path_single.plataform,
+                )]
+        for i in range(-1, -4, -1):
+            j = randint(1, 4)
             self.regions.append(
                 Region(
                     os.path.join(path_single.assets, f"preset{j}.txt"),
                     self.dimension[0],
                     self.dimension[1],
                     i * self.dimension[1],
-                    path_single.plataform,
-                )
+                    path_single.plataform)
             )
 
     def update_world(self):
@@ -89,8 +95,7 @@ class World:
                     self.dimension[0],
                     self.dimension[1],
                     self.regions[-1].offset - self.dimension[1],
-                    path_single.plataform,
-                )
+                    path_single.plataform)
             )
 
     # Move all elements in the world down

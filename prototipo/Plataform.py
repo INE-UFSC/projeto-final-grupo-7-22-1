@@ -11,8 +11,8 @@ class PLATAFORM_TYPE(enum.Enum):
 
 
 class Plataform(Actor):
-    def __init__(self, pos: tuple, size: tuple, type: PLATAFORM_TYPE, img):
-        super().__init__(pos, size, img)
+    def __init__(self, pos: tuple, type: PLATAFORM_TYPE, img):
+        super().__init__(pos, img)
         self.__type = type
 
     @property
