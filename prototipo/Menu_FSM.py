@@ -57,14 +57,6 @@ class Menu_FSM:
         elif self.current_state == State.SCORE_MENU:
             self.__status = self.__game_controller.score_loop()
 
-    def Menu_Loop(self):
-        while True:
-            self.__clock.tick(self.FPS)
-            self.FPS += 0.01
-            if self.__current_state == 0:
-                self.State0()
-            self.__drawn.draw()
-            pygame.display.update()
     
 
  

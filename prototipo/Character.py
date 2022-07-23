@@ -1,5 +1,5 @@
 from Actor import Actor
-
+from ConstantSingleton import const_single
 
 # Class Character implements especialization from actor to a character controlled by the player 
 class Character(Actor):
@@ -8,18 +8,9 @@ class Character(Actor):
 
         #Attributes
         self.__hasCollided = False # True if character has collided with any other object
-        self.__gravity = 0.5 # Gravity acceleration
         self.__jump_strengh = 0.0 # Percentage of total jump strengh
 
     #Getters and Setters
-    @property
-    def gravity(self):
-        return self.__gravity
-
-    @gravity.setter
-    def gravity(self, gravity):
-        self.__gravity = gravity
-
     @property
     def jump_strengh(self):
         return self.__jump_strengh
@@ -39,9 +30,9 @@ class Character(Actor):
     # Updates vector x depending on given direction 
     def update_movement(self, dir: str):
         if dir == "r":
-            self.vx = 10
+            self.vx = const_single.char_movement
         elif dir == "l":
-            self.vx = -10
+            self.vx = -const_single.char_movement
         elif dir == "s":
             self.vx = 0
         else:
@@ -51,19 +42,19 @@ class Character(Actor):
     def increase_jump_force(self):
         if self.hasCollided:
             if self.jump_strengh == 0:
-                self.jump_strengh = 0.2
-            if self.jump_strengh < 0.4:
-                self.jump_strengh += 0.005
+                self.jump_strengh = const_single.jump_strengh_minimum
+            if self.jump_strengh < const_single.jump_strengh_limit:
+                self.jump_strengh += const_single.jump_strengh_increase
 
     # Increases vector y according to jump strengh
     def jump(self):
         if self.hasCollided:
-            self.vy -= 50 * self.jump_strengh
+            self.vy -= const_single.jump_speed * self.jump_strengh
             self.jump_strengh = 0
 
     # Updates fall speed
     def fall(self):
-        self.vy += self.gravity
+        self.vy += const_single.gravity
 
     # Moves character position using internal vectors
     def move(self):

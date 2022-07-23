@@ -6,9 +6,6 @@ from Region import Region
 
 
 class Collision:
-    def __init__(self):
-        self.x_modificador = -15
-
     def Hit(self, player, plataform):
         Hit_Boolean = pygame.sprite.spritecollide(player, plataform, False)
         if Hit_Boolean != []:

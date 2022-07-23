@@ -49,7 +49,7 @@ class World:
                     0, path_single.plataform,
                 )]
         for i in range(-1, -4, -1):
-            j = randint(1, 4)
+            j = randint(1, const_single.preset_amount)
             self.regions.append(
                 Region(
                     os.path.join(path_single.assets, f"preset{j}.txt"),
@@ -88,7 +88,7 @@ class World:
         # Check if new region is necessary
         if self.regions[0].offset > 2 * self.dimension[1]:
             self.regions.pop(0)
-            j = randint(1, 4)
+            j = randint(1, const_single.preset_amount)
             self.regions.append(
                 Region(
                     os.path.join(path_single.assets, f"preset{j}.txt"),
@@ -101,7 +101,7 @@ class World:
     # Move all elements in the world down
     def __move_world(self):
         # Speed up screen movement if player is to close to the top
-        if self.player.y < 50:
+        if self.player.y < const_single.upper_limit:
             self.__world_vel += 1
         else:
             self.__world_vel = 2
@@ -128,7 +128,7 @@ class World:
             self.player.set_pos(
                 0, -((self.player.y + self.player.height) - hit.y)
             )
-            self.player.vy = 0
+            hit.player_collision(self.player)
 
         # Stop player from leave to the left or right of the screen
         if self.player.x + self.player.width >= self.dimension[0]:
@@ -141,7 +141,7 @@ class World:
             self.player.update_movement("s")
 
     def check_defeat_conditions(self):
-        if self.player.y > self.dimension[1] * 1.5:
+        if self.player.y > self.dimension[1] * const_single.defeat_condition_multiplier:
             return True
         return False
 

@@ -55,6 +55,7 @@ class GameController:
             elif event.type == pygame.KEYDOWN:
                 self.world.reset()
                 self.controller.char = self.world.player
+                self.controller.init_keyboard()
                 self.FPS = 60
                 if event.key == pygame.K_ESCAPE:
                     return "menu"

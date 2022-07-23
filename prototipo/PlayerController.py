@@ -5,10 +5,7 @@ from Character import Character
 class PlayerCharacter:
     def __init__(self, char: Character):
         self.__char = char
-        self.__keyboard = {
-            'a': False,
-            'd': False,
-            'space': False}
+        self.init_keyboard()
 
     @property
     def char(self):
@@ -54,4 +51,9 @@ class PlayerCharacter:
             self.char.increase_jump_force()
         else:
             self.char.jump()
-        
+    
+    def init_keyboard(self):
+        self.__keyboard = {
+            'a': False,
+            'd': False,
+            'space': False}

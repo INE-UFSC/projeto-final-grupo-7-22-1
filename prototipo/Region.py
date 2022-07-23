@@ -2,7 +2,7 @@
 
 from Plataform import PLATAFORM_TYPE
 from BasicPlataform import BasicPlataform
-
+from ConstantSingleton import const_single
 
 class Region:
     def __init__(self, filepath: str, width: int, height: int, offset: int, img):
@@ -27,7 +27,7 @@ class Region:
     def init_plataforms(self, width: int, height: int, img):
         ypos = self.offset
         for line in self.__layout:
-            ypos += 150
+            ypos += const_single.yoffset
             temp_plat = []
             for xpos in line.split(sep=','):
                 temp_plat.append(BasicPlataform((width*(int(xpos)/100), ypos), PLATAFORM_TYPE.BASIC, img))

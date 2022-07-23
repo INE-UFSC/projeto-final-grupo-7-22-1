@@ -26,3 +26,7 @@ class Plataform(Actor):
     @abstractmethod
     def move(self):
         pass
+
+    @abstractmethod
+    def player_collision(self, player):
+        pass
