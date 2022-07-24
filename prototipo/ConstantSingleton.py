@@ -7,7 +7,7 @@ class ConstantSingleton:
         self.height = 600
 
         #World properties
-        self.world_vel = 2.0
+        self.world_vel = 0
         self.defeat_condition_multiplier = 1.5
         self.upper_limit = 50
         self.preset_amount = 4

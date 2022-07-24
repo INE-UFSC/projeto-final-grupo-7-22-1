@@ -37,7 +37,7 @@ class World:
 
     # Initializes player
     def __init_player(self):
-        self.__player = Character((self.__dimension[0]/2, self.__dimension[1]/2), path_single.player)
+        self.__player = Character((self.__dimension[0]/2, self.__dimension[1]/2), path_single.player_idle)
 
     # Initializes regions
     def __init_regions(self):
@@ -63,6 +63,7 @@ class World:
 
         self.__move_world()
         self.__check_player_collision()
+        #self.player.update_sprite()
         
         self.score.increase_score(1)
         print(self.score.string())
@@ -104,7 +105,7 @@ class World:
         if self.player.y < const_single.upper_limit:
             self.__world_vel += 1
         else:
-            self.__world_vel = 2
+            self.__world_vel = const_single.world_vel
 
         # Updates region positions
         self.__update_regions()
@@ -123,12 +124,12 @@ class World:
         if hit is False:
             self.player.hasCollided = False  # Player didn't collide
         else:
-            self.player.hasCollided = True  # Player collided
             # Moves player to top of plataform
-            self.player.set_pos(
-                0, -((self.player.y + self.player.height) - hit.y)
-            )
-            hit.player_collision(self.player)
+            if self.player.vy > 0:
+                self.player.hasCollided = True  # Player collided
+                self.player.set_pos(
+                    0, -((self.player.y + self.player.height) - hit.y))
+                hit.player_collision(self.player)
 
         # Stop player from leave to the left or right of the screen
         if self.player.x + self.player.width >= self.dimension[0]:

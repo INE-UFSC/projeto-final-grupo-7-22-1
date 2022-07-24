@@ -1,5 +1,6 @@
 from Actor import Actor
 from ConstantSingleton import const_single
+from PathSingleton import path_single
 
 # Class Character implements especialization from actor to a character controlled by the player 
 class Character(Actor):
@@ -8,6 +9,7 @@ class Character(Actor):
 
         #Attributes
         self.__hasCollided = False # True if character has collided with any other object
+        self.__running = False
         self.__jump_strengh = 0.0 # Percentage of total jump strengh
 
     #Getters and Setters
@@ -31,9 +33,12 @@ class Character(Actor):
     def update_movement(self, dir: str):
         if dir == "r":
             self.vx = const_single.char_movement
+            self.__running = True
         elif dir == "l":
+            self.__running = True
             self.vx = -const_single.char_movement
         elif dir == "s":
+            self.__running = False
             self.vx = 0
         else:
             print("Direction parameter must be 'r', 'l' or 's'")
@@ -68,3 +73,9 @@ class Character(Actor):
         self.x += vx
         self.y += vy
         self.rect.update(self.x, self.y, self.width, self.height)
+    
+    def update_sprite(self):
+        if self.__running:
+            self.image = path_single.player_run
+        else:
+            self.image = path_single.player_idle

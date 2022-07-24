@@ -71,6 +71,10 @@ class Actor(ABC, pygame.sprite.Sprite):
     def image(self):
         return self.__image   
 
+    @image.setter
+    def image(self, image):
+        self.__image = image   
+
     @property
     def rect(self):
         return self.__rect

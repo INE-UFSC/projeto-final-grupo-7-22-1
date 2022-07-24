@@ -15,8 +15,8 @@ class Collision:
 
     def Update_Hit(self, player, plataform):
         #Checa colisao
-        if ((player.y < plataform.y < player.y + player.height
-            and ((player.y + player.height) - plataform.y) <= 0.25*plataform.height and player.vy > 0)
+        if (((plataform.y < player.y + player.height < plataform.y + plataform.height)
+            or (plataform.y < player.y < plataform.y + plataform.height))
             and (plataform.x < player.x < plataform.x + plataform.width
             or plataform.x < player.x + player.width < plataform.x + plataform.width)):
                 return True

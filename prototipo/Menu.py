@@ -6,29 +6,29 @@ class Menu:
     def __init__(self, height, width):
         pygame.font.init()
         self.__Start_Button = Button(
-            path_single.plataform,
-            path_single.plataform2,
+            path_single.button,
+            path_single.button2,
             [height / 4, width / 2],
             "START",
-            pygame.font.Font(pygame.font.get_default_font(), 50),
+            pygame.font.Font(pygame.font.get_default_font(), 45),
             pygame.Color(252, 233, 79),
             pygame.Color(237, 212, 0),
         )
         self.__Score_Button = Button(
-            path_single.plataform,
-            path_single.plataform2,
-            [height / 4, width / 1.7],
+            path_single.button,
+            path_single.button2,
+            [height / 4, width / 2 + 60],
             "SCORE",
-            pygame.font.Font(pygame.font.get_default_font(), 50),
+            pygame.font.Font(pygame.font.get_default_font(), 45),
             pygame.Color(252, 233, 79),
             pygame.Color(237, 212, 0),
         )
         self.__Quit_Button = Button(
-            path_single.plataform,
-            path_single.plataform2,
-            [height / 4, width / 1.5],
+            path_single.button,
+            path_single.button2,
+            [height / 4, width / 2 + 120],
             "QUIT",
-            pygame.font.Font(pygame.font.get_default_font(), 50),
+            pygame.font.Font(pygame.font.get_default_font(), 45),
             pygame.Color(252, 233, 79),
             pygame.Color(237, 212, 0),
         )
