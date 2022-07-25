@@ -1,7 +1,7 @@
 
 
 
-from Plataform import Plataform, PLATAFORM_TYPE
+from entities.Plataform import Plataform, PLATAFORM_TYPE
 
 
 class BasicPlataform(Plataform):

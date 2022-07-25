@@ -1,8 +1,7 @@
 import os.path
-import pygame
-from Character import Character
-from Region import Region
-from Collision import Collision
+from entities.Character import Character
+from environment.Region import Region
+from modules.Collision import Collision
 from random import randint
 from PathSingleton import path_single
 from ConstantSingleton import const_single
@@ -125,7 +124,7 @@ class World:
             self.player.hasCollided = False  # Player didn't collide
         else:
             # Moves player to top of plataform
-            if self.player.vy > 0:
+            if self.player.y + self.player.height - self.player.vy <= hit.y + 5:
                 self.player.hasCollided = True  # Player collided
                 self.player.set_pos(
                     0, -((self.player.y + self.player.height) - hit.y))

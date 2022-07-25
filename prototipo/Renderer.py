@@ -1,5 +1,5 @@
 import pygame
-from Menu import Menu
+from menu_elements.Menu import Menu
 
 
 class Renderer:

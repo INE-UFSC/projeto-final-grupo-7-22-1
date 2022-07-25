@@ -1,6 +1,5 @@
 from ConstantSingleton import const_single
-from GameController import GameController
-from Menu import Menu
+from controllers.GameController import GameController
 from Menu_FSM import Menu_FSM
 
 game = GameController(const_single.width, const_single.height)

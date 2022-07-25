@@ -2,7 +2,7 @@
 
 import pygame
 from Character import Character
-from PlayerController import PlayerCharacter
+from controllers.PlayerController import PlayerCharacter
 from Plataform import PLATAFORM_TYPE
 from BasicPlataform import BasicPlataform
 from World import World

@@ -1,6 +1,5 @@
 import pickle as pkl
 
-
 class DAO:
     def __init__(self, datasource):
         self.__datasource = datasource

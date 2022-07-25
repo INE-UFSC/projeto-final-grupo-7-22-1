@@ -1,7 +1,7 @@
 
 
-from Plataform import PLATAFORM_TYPE
-from BasicPlataform import BasicPlataform
+from entities.Plataform import PLATAFORM_TYPE
+from entities.BasicPlataform import BasicPlataform
 from ConstantSingleton import const_single
 
 class Region:

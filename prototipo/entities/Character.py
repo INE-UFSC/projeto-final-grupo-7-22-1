@@ -1,4 +1,4 @@
-from Actor import Actor
+from entities.Actor import Actor
 from ConstantSingleton import const_single
 from PathSingleton import path_single
 

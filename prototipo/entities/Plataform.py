@@ -1,7 +1,7 @@
 
 
 from abc import ABC, abstractmethod
-from Actor import Actor
+from entities.Actor import Actor
 import enum
 
 

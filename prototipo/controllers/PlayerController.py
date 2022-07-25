@@ -1,6 +1,6 @@
 import pygame
 from pygame.locals import *
-from Character import Character
+from entities.Character import Character
 
 class PlayerCharacter:
     def __init__(self, char: Character):

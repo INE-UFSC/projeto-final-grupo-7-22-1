@@ -1,11 +1,11 @@
 import pygame
-from Character import Character
-from PlayerController import PlayerCharacter
-from Plataform import PLATAFORM_TYPE
-from BasicPlataform import BasicPlataform
-from World import World
+from entities.Character import Character
+from controllers.PlayerController import PlayerCharacter
+from entities.Plataform import PLATAFORM_TYPE
+from entities.BasicPlataform import BasicPlataform
+from environment.World import World
 from Renderer import Renderer
-from Menu import Menu
+from menu_elements.Menu import Menu
 
 
 class GameController:

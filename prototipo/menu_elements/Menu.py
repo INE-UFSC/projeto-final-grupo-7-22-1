@@ -1,4 +1,4 @@
-from Button import Button
+from menu_elements.Button import Button
 from PathSingleton import path_single
 import pygame
 
