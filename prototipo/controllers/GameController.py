@@ -80,6 +80,8 @@ class GameController:
                     if self.__menu.state == 0:
                         return "start"
                     elif self.__menu.state == 1:
+                        for score in self.world.scoreDAO.get_all():
+                            print(score.string())
                         return "score"
                     elif self.__menu.state == 2:
                         pygame.display.quit()

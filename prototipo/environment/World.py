@@ -34,6 +34,10 @@ class World:
     def score(self):
         return self.__score
 
+    @property
+    def scoreDAO(self):
+        return self.__scoreDAO
+
     # Initializes player
     def __init_player(self):
         self.__player = Character((self.__dimension[0]/2, self.__dimension[1]/2), path_single.character_idle)
@@ -65,7 +69,6 @@ class World:
         self.__check_player_collision()
         
         self.score.increase_score(1)
-        print(self.score.string())
 
     # Check collision for each plataform
     # @Return plataform if a collision happened
@@ -149,3 +152,4 @@ class World:
         self.__init_regions()
         self.__init_player()
         self.__scoreDAO.add(self.__score)
+        self.__score = Score("player")
