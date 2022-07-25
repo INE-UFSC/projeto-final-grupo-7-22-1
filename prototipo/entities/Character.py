@@ -10,6 +10,7 @@ class Character(Actor):
         #Attributes
         self.__hasCollided = False # True if character has collided with any other object
         self.__running = False
+        self.__preparing_jump = False
         self.__jump_strengh = 0.0 # Percentage of total jump strengh
 
     #Getters and Setters
@@ -50,12 +51,14 @@ class Character(Actor):
                 self.jump_strengh = const_single.jump_strengh_minimum
             if self.jump_strengh < const_single.jump_strengh_limit:
                 self.jump_strengh += const_single.jump_strengh_increase
+            self.__preparing_jump = True
 
     # Increases vector y according to jump strengh
     def jump(self):
         if self.hasCollided:
             self.vy -= const_single.jump_speed * self.jump_strengh
             self.jump_strengh = 0
+            self.__preparing_jump = False
 
     # Updates fall speed
     def fall(self):
@@ -75,7 +78,22 @@ class Character(Actor):
         self.rect.update(self.x, self.y, self.width, self.height)
     
     def update_sprite(self):
-        if self.__running:
-            self.image = path_single.player_run
+        if self.__preparing_jump:
+            self.image = path_single.character_preparing_jump
+        elif self.vy < 0:
+            if self.vx > 0:
+                self.image = path_single.character_jump
+            else:
+                self.image = path_single.character_jump2
+        elif self.vy > 0:
+            if self.vx > 0:
+                self.image = path_single.character_fall
+            else:
+                self.image = path_single.character_fall2
+        elif self.__running:
+            if self.vx > 0:
+                self.image = path_single.character_run
+            else:
+                self.image = path_single.character_run2
         else:
-            self.image = path_single.player_idle
+            self.image = path_single.character_idle

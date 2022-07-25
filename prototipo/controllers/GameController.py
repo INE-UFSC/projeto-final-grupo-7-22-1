@@ -15,12 +15,11 @@ class GameController:
         self.__menu = Menu(height, width)
         self.__screen = pygame.display.set_mode((width, height))
         self.__renderer = Renderer(self.__world, self.__menu, self.__screen)
-        self.__controller = PlayerCharacter(self.__world.player)
+        self.__player_controller = PlayerCharacter(self.__world.player)
         self.__clock = pygame.time.Clock()
         self.FPS = 60
-
-    def game_loop(self):
         
+    def game_loop(self):
         self.__clock.tick(self.FPS)
         self.FPS += 0.01
 
@@ -33,11 +32,11 @@ class GameController:
                 if event.key == pygame.K_ESCAPE:
                     return "pause"
                 else:
-                    self.__controller.update_keyboard(event)
+                    self.player_controller.update_keyboard(event)
             elif event.type == pygame.KEYUP:
-                self.__controller.update_keyboard(event)
+                self.player_controller.update_keyboard(event)
 
-        self.controller.update_char()
+        self.player_controller.update_char()
         self.world.update_world()
         self.__renderer.draw()
         pygame.display.update()
@@ -54,8 +53,8 @@ class GameController:
                 exit()
             elif event.type == pygame.KEYDOWN:
                 self.world.reset()
-                self.controller.char = self.world.player
-                self.controller.init_keyboard()
+                self.player_controller.char = self.world.player
+                self.player_controller.init_keyboard()
                 self.FPS = 60
                 if event.key == pygame.K_ESCAPE:
                     return "menu"
@@ -106,5 +105,5 @@ class GameController:
         return self.__world
 
     @property
-    def controller(self):
-        return self.__controller
+    def player_controller(self):
+        return self.__player_controller

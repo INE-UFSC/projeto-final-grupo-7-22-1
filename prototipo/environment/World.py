@@ -36,7 +36,7 @@ class World:
 
     # Initializes player
     def __init_player(self):
-        self.__player = Character((self.__dimension[0]/2, self.__dimension[1]/2), path_single.player_idle)
+        self.__player = Character((self.__dimension[0]/2, self.__dimension[1]/2), path_single.character_idle)
 
     # Initializes regions
     def __init_regions(self):
@@ -61,8 +61,8 @@ class World:
     def update_world(self):
 
         self.__move_world()
+        self.player.update_sprite()
         self.__check_player_collision()
-        #self.player.update_sprite()
         
         self.score.increase_score(1)
         print(self.score.string())

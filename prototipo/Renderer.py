@@ -1,6 +1,6 @@
 import pygame
 from menu_elements.Menu import Menu
-
+from PathSingleton import path_single
 
 class Renderer:
     def __init__(self, object_world, object_menu, object_screen):
@@ -10,7 +10,8 @@ class Renderer:
         ### object_menu
 
     def draw(self):
-        self.__screen.fill("white")
+        self.__screen.blit(path_single.background, self.__screen.get_rect())
+
         for region in self.__object_world.regions:
             for step in region.objects:
                 for actor in step:
@@ -20,7 +21,7 @@ class Renderer:
         )
 
     def draw_menu(self):
-        self.__screen.fill("white")
+        self.__screen.blit(path_single.background, self.__screen.get_rect())
         self.draw_button(self.__menu.start_button)
         self.draw_button(self.__menu.score_button)
         self.draw_button(self.__menu.quit_button)
