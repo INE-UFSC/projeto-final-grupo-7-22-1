@@ -131,13 +131,13 @@ class World:
                 hit.player_collision(self.player)
 
         # Stop player from leave to the left or right of the screen
-        if self.player.x + self.player.width >= self.dimension[0]:
+        if self.player.x + self.player.width >= (self.dimension[0] - const_single.wall_bound):
             self.player.set_pos(
-                self.dimension[0] - (self.player.x + self.player.width), 0
+                self.dimension[0] - (self.player.x + self.player.width + const_single.wall_bound), 0
             )
             self.player.update_movement("s")
-        if self.player.x < 0:
-            self.player.set_pos(-self.player.x, 0)
+        if self.player.x < const_single.wall_bound:
+            self.player.set_pos((const_single.wall_bound-self.player.x), 0)
             self.player.update_movement("s")
 
     def check_defeat_conditions(self):

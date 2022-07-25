@@ -18,5 +18,5 @@ class BasicPlataform(Plataform):
         self.rect.move_ip(self.vx, self.vy)
     
     def player_collision(self, player):
-        player.vx = 0
+        player.vx *= 5
         player.vy = 0
