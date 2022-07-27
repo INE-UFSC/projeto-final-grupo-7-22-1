@@ -1,3 +1,4 @@
+from pygame import font, Color
 
 
 class ConstantSingleton:
@@ -5,6 +6,19 @@ class ConstantSingleton:
         #Screen size
         self.width = 800
         self.height = 600
+
+        #Colors
+        self.color_button_unselected = Color(222, 222, 222)
+        self.color_button_selected = Color(122, 122, 122)
+
+        #Fonts
+        font.init()
+        self.button_font_size = 40
+        self.text_font_size = 30
+        self.text_font_size_small = 20
+        self.button_font = font.Font(font.get_default_font(), self.button_font_size)
+        self.text_font = font.Font(font.get_default_font(), self.text_font_size)
+        self.text_font_small = font.Font(font.get_default_font(), self.text_font_size_small)
 
         #World properties
         self.world_vel = 2

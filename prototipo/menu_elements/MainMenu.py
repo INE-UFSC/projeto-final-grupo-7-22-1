@@ -1,36 +1,35 @@
 from menu_elements.Button import Button
 from PathSingleton import path_single
-import pygame
+from ConstantSingleton import const_single
 
-class Menu:
+class MainMenu:
     def __init__(self, height, width):
-        pygame.font.init()
         self.__Start_Button = Button(
             path_single.button,
             path_single.button2,
             [height / 4, width / 2],
             "START",
-            pygame.font.Font(pygame.font.get_default_font(), 45),
-            pygame.Color(252, 233, 79),
-            pygame.Color(237, 212, 0),
+            const_single.button_font,
+            const_single.color_button_unselected,
+            const_single.color_button_selected,
         )
         self.__Score_Button = Button(
             path_single.button,
             path_single.button2,
             [height / 4, width / 2 + 60],
             "SCORE",
-            pygame.font.Font(pygame.font.get_default_font(), 45),
-            pygame.Color(252, 233, 79),
-            pygame.Color(237, 212, 0),
+            const_single.button_font,
+            const_single.color_button_unselected,
+            const_single.color_button_selected,
         )
         self.__Quit_Button = Button(
             path_single.button,
             path_single.button2,
             [height / 4, width / 2 + 120],
             "QUIT",
-            pygame.font.Font(pygame.font.get_default_font(), 45),
-            pygame.Color(252, 233, 79),
-            pygame.Color(237, 212, 0),
+            const_single.button_font,
+            const_single.color_button_unselected,
+            const_single.color_button_selected,
         )
         self.__state_Index = 0
 

@@ -7,6 +7,7 @@ from PathSingleton import path_single
 from ConstantSingleton import const_single
 from Score import Score
 from ScoreDAO import ScoreDAO
+from menu_elements.TextBox import TextBox
 
 class World:
     def __init__(self, width: int, height: int, name = "player"):
@@ -15,6 +16,8 @@ class World:
         self.__world_vel = const_single.world_vel
         self.__score = Score(name) # Active player score
         self.__scoreDAO = ScoreDAO()
+        self.__score_text = TextBox(path_single.button, (0.9*self.dimension[0], 0.1*self.dimension[1]), 
+                                    str(self.__score.points), const_single.text_font, const_single.color_button_unselected)
         self.__init_player()
         self.__init_regions()
 
@@ -37,6 +40,10 @@ class World:
     @property
     def scoreDAO(self):
         return self.__scoreDAO
+    
+    @property
+    def score_text(self):
+        return self.__score_text
 
     # Initializes player
     def __init_player(self):
@@ -65,6 +72,7 @@ class World:
         self.__move_world()
         self.player.update_sprite()
         self.__check_player_collision()
+        self.score_text.change_text(str(self.score.points))
         
         self.score.increase_score(1)
 

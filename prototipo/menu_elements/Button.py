@@ -1,4 +1,3 @@
-import pygame
 
 
 class Button:
@@ -27,9 +26,11 @@ class Button:
 
     def change_Color(self):
         self.image = self.image2
+        self.text = self.font.render(self.text_input, True, self.hovering_color)
 
     
     def og_Color(self):
         self.image = self.image1
+        self.text = self.font.render(self.text_input, True, self.base_color)
     
 #def menu_Button_Style(self):

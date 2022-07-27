@@ -9,6 +9,9 @@ class Path_Singleton:
         self.background = pg.image.load(os.path.join(self.assets, "background.png"))
         self.background = pg.transform.scale(self.background, (800,600))
 
+        self.scoreboard = pg.image.load(os.path.join(self.assets, "scoreboard_background.png"))
+        self.scoreboard = pg.transform.scale(self.scoreboard, (440,440))
+
         self.character_idle = pg.image.load(os.path.join(self.assets, "character_idle.png"))
         self.character_idle = pg.transform.scale(self.character_idle, (40,80))
         

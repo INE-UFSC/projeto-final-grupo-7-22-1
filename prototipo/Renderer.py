@@ -1,15 +1,16 @@
-import pygame
-from menu_elements.Menu import Menu
+
+
 from PathSingleton import path_single
 
 class Renderer:
-    def __init__(self, object_world, object_menu, object_screen):
+    def __init__(self, object_world, main_menu, object_screen, score_menu):
         self.__object_world = object_world
         self.__screen = object_screen
-        self.__menu = object_menu
+        self.__main_menu = main_menu
+        self.__score_menu = score_menu
         ### object_menu
 
-    def draw(self):
+    def draw_game(self):
         self.__screen.blit(path_single.background, self.__screen.get_rect())
 
         for region in self.__object_world.regions:
@@ -17,15 +18,20 @@ class Renderer:
                 for actor in step:
                     self.__screen.blit(actor.image, actor.rect)
         self.__screen.blit(
-            self.__object_world.player.image, self.__object_world.player.rect
-        )
+            self.__object_world.player.image, self.__object_world.player.rect)
+        self.__screen.blit(self.__object_world.score_text.text, self.__object_world.score_text.text_rect)
 
-    def draw_menu(self):
+    def draw_main_menu(self):
         self.__screen.blit(path_single.background, self.__screen.get_rect())
-        self.draw_button(self.__menu.start_button)
-        self.draw_button(self.__menu.score_button)
-        self.draw_button(self.__menu.quit_button)
+        self.draw_button(self.__main_menu.start_button)
+        self.draw_button(self.__main_menu.score_button)
+        self.draw_button(self.__main_menu.quit_button)
 
+    def draw_score_menu(self):
+        self.__screen.blit(path_single.background, self.__screen.get_rect())
+        self.__screen.blit(self.__score_menu.scoreboard_text.image, self.__score_menu.scoreboard_text.rect)
+        for score_text_line in self.__score_menu.score_text_lines:
+            self.__screen.blit(score_text_line.text, score_text_line.text_rect)
         
     def draw_button(self, button):
         self.__screen.blit(button.image, button.rect)
