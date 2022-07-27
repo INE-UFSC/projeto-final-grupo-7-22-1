@@ -48,8 +48,7 @@ class World:
                 Region(
                     os.path.join(path_single.assets, "preset1.txt"),
                     self.dimension[0],
-                    self.dimension[1],
-                    0, path_single.plataform,
+                    self.dimension[1], 0
                 )]
         for i in range(-1, -4, -1):
             j = randint(1, const_single.preset_amount)
@@ -58,8 +57,7 @@ class World:
                     os.path.join(path_single.assets, f"preset{j}.txt"),
                     self.dimension[0],
                     self.dimension[1],
-                    i * self.dimension[1],
-                    path_single.plataform)
+                    i * self.dimension[1])
             )
 
     def update_world(self):
@@ -97,8 +95,7 @@ class World:
                     os.path.join(path_single.assets, f"preset{j}.txt"),
                     self.dimension[0],
                     self.dimension[1],
-                    self.regions[-1].offset - self.dimension[1],
-                    path_single.plataform)
+                    self.regions[-1].offset - self.dimension[1])
             )
 
     # Move all elements in the world down

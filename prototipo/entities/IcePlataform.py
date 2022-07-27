@@ -4,7 +4,7 @@
 from entities.Plataform import Plataform, PLATAFORM_TYPE
 
 
-class BasicPlataform(Plataform):
+class IcePlataform(Plataform):
     def __init__(self, pos: tuple, type: PLATAFORM_TYPE, img):
         super().__init__(pos, type, img)
 
@@ -18,5 +18,5 @@ class BasicPlataform(Plataform):
         self.rect.move_ip(self.vx, self.vy)
     
     def player_collision(self, player):
-        player.update_movement('s')
+        player.update_movement('s', 0.25)
         player.vy = 0

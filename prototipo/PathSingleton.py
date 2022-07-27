@@ -27,9 +27,12 @@ class Path_Singleton:
         self.character_jump = pg.transform.scale(self.character_jump, (60,80))
         self.character_jump2 = pg.transform.flip(self.character_jump, True, False)
         
-        self.plataform = pg.image.load(os.path.join(self.assets, "Plataform1.png"))
-        self.plataform = pg.transform.scale(self.plataform, (150,50))
-        self.plataform2 = pg.image.load(os.path.join(self.assets, "Plataform2.png"))
+        self.basic_plataform = pg.image.load(os.path.join(self.assets, "BasicPlataform.png"))
+        self.basic_plataform = pg.transform.scale(self.basic_plataform, (150,50))
+        
+        self.ice_plataform = pg.image.load(os.path.join(self.assets, "IcePlataform.png"))
+        self.ice_plataform = pg.transform.scale(self.ice_plataform, (150,50))
+
         self.button = pg.image.load(os.path.join(self.assets, "Button1.png"))
         self.button = pg.transform.scale(self.button, (150,50))
         self.button2 = pg.image.load(os.path.join(self.assets, "Button2.png"))

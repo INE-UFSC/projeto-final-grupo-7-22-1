@@ -16,6 +16,9 @@ class ConstantSingleton:
         #Region Properties
         self.yoffset = 150
 
+        #Plataform properties
+        self.friction_const = 2
+
         #Character properties
         self.char_movement = 5
         self.gravity = 0.5

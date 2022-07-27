@@ -6,8 +6,8 @@ import enum
 
 
 class PLATAFORM_TYPE(enum.Enum):
-    BASIC = 1
-    ICY = 2
+    BASIC = 3
+    ICE = 1
 
 
 class Plataform(Actor):

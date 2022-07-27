@@ -31,7 +31,7 @@ class Character(Actor):
         self.__hasCollided = cond
 
     # Updates vector x depending on given direction 
-    def update_movement(self, dir: str):
+    def update_movement(self, dir: str, friction = const_single.friction_const):
         if dir == "r":
             self.vx = const_single.char_movement
             self.__running = True
@@ -40,7 +40,12 @@ class Character(Actor):
             self.vx = -const_single.char_movement
         elif dir == "s":
             self.__running = False
-            self.vx = 0
+            if self.vx > friction:
+                self.vx -= friction
+            elif self.vx < -friction:
+                self.vx += friction
+            else:
+                self.vx = 0
         else:
             print("Direction parameter must be 'r', 'l' or 's'")
 
