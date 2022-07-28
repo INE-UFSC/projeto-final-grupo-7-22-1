@@ -14,7 +14,7 @@ class World:
         self.__dimension = (width, height) # Screen dimensions
         self.__col_module = Collision() # Collision Module
         self.__world_vel = const_single.world_vel
-        self.__score = Score(name) # Active player score
+        self.__score = Score(input()) # Active player score
         self.__scoreDAO = ScoreDAO()
         self.__score_text = TextBox(path_single.button, (0.9*self.dimension[0], 0.1*self.dimension[1]), 
                                     str(self.__score.points), const_single.text_font, const_single.color_button_unselected)
@@ -158,4 +158,4 @@ class World:
         self.__init_player()
         self.__scoreDAO.add(self.__score)
         print(self.scoreDAO.get_all())
-        self.__score = Score("player")
+        self.__score = Score(self.__score.name)
