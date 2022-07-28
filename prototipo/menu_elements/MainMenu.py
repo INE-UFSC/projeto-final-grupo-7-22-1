@@ -2,6 +2,7 @@ from menu_elements.Button import Button
 from PathSingleton import path_single
 from ConstantSingleton import const_single
 
+
 class MainMenu:
     def __init__(self, height, width):
         self.__Start_Button = Button(
@@ -33,18 +34,15 @@ class MainMenu:
         )
         self.__state_Index = 0
 
-        
-
-
     def return_button(self):
         return self.__Start_Button
 
     def return_score(self):
         return self.__Score_Button
-    
+
     def return_quit(self):
         return self.__Quit_Button
-    
+
     def return_state(self):
         return self.__state_Index
 
@@ -55,7 +53,6 @@ class MainMenu:
     score_button = property(fget=return_score)
     quit_button = property(fget=return_quit)
     state = property(fget=return_state)
-
 
     def state_Exec(self):
         if self.__state_Index == 0:
@@ -81,7 +78,7 @@ class MainMenu:
     def Score_State(self):
         self.__Start_Button.og_Color()
         self.__Score_Button.change_Color()
-        self.__Quit_Button.og_Color()   
+        self.__Quit_Button.og_Color()
 
     def Quit_State(self):
         self.__Start_Button.og_Color()
