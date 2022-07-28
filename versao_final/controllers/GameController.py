@@ -7,10 +7,21 @@ from environment.World import World
 from Renderer import Renderer
 from menu_elements.MainMenu import MainMenu
 from menu_elements.ScoreMenu import ScoreMenu
+from states.MainMenuState import MainMenuState
+from states.ScoreMenuState import ScoreMenuState
+from states.GameLoopState import GameLoopState
+from states.GameOverState import GameOverState
 
 class GameController:
     def __init__(self, width: int, height: int):
         pygame.init()
+        self.__states = {
+            "menu" : MainMenuState(self),
+            "score": ScoreMenuState(self),
+            "start": GameLoopState(self),
+            "game-over": GameOverState(self)
+        }
+        self.__current_state = self.__states["menu"]
         self.__world = World(width, height)
         self.__main_menu = MainMenu(height, width)
         self.__score_menu = ScoreMenu(height, width)
@@ -19,7 +30,13 @@ class GameController:
         self.__player_controller = PlayerCharacter(self.__world.player)
         self.__clock = pygame.time.Clock()
         self.FPS = 60
-        
+    
+    def run(self):
+        while True:
+            nextState = self.__current_state.execute()
+            if nextState != None:
+                self.__current_state = self.__states[nextState]
+
     def game_loop(self):
         self.__clock.tick(self.FPS)
         self.FPS += 0.005
@@ -31,7 +48,7 @@ class GameController:
                 exit()
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
-                    return "pause"
+                    return "menu"
                 else:
                     self.player_controller.update_keyboard(event)
             elif event.type == pygame.KEYUP:
@@ -60,7 +77,7 @@ class GameController:
                 if event.key == pygame.K_ESCAPE:
                     return "menu"
                 else:
-                    return "restart"
+                    return "start"
 
     def main_menu_loop(self):
         self.__main_menu.state_Exec()
@@ -86,10 +103,8 @@ class GameController:
                         pygame.display.quit()
                         pygame.quit()
                         exit()
-                elif type == pygame.KEYUP:
-                    return "stay"
 
-    def score_loop(self):
+    def score_menu_loop(self):
         self.__score_menu.update_score_text(self.__world.scoreDAO.get_all())
         self.__renderer.draw_score_menu()
         self.__clock.tick(self.FPS)
