@@ -26,12 +26,15 @@ class ScoreMenu:
     def update_score_text(self, score_dict):
         self.score_text_lines = self.score_text_lines[0:1]
         i = 0
-        for score in score_dict:
+        scores = []
+        for s in score_dict:
+            scores.append((s.points, s))
+        for score in sorted(scores, reverse=True, key= lambda i: i[0])[0:9]:
             self.score_text_lines.append(
                 TextBox(
                     path_single.button,
                     (self.width / 2, 200 + i),
-                    score.string(),
+                    score[1].string(),
                     const_single.text_font_small,
                     const_single.color_button_unselected
             ))

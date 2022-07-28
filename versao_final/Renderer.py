@@ -3,11 +3,12 @@
 from PathSingleton import path_single
 
 class Renderer:
-    def __init__(self, object_world, main_menu, object_screen, score_menu):
+    def __init__(self, object_world, main_menu, object_screen, score_menu, game_over_menu):
         self.__object_world = object_world
         self.__screen = object_screen
         self.__main_menu = main_menu
         self.__score_menu = score_menu
+        self.__game_over_menu = game_over_menu
         ### object_menu
 
     def draw_game(self):
@@ -32,6 +33,11 @@ class Renderer:
         self.__screen.blit(self.__score_menu.scoreboard_text.image, self.__score_menu.scoreboard_text.rect)
         for score_text_line in self.__score_menu.score_text_lines:
             self.__screen.blit(score_text_line.text, score_text_line.text_rect)
+    
+    def draw_game_over_menu(self):
+        self.__screen.blit(path_single.background, self.__screen.get_rect())
+        for text_box in self.__game_over_menu.text_lines:
+            self.__screen.blit(text_box.text, text_box.text_rect)
         
     def draw_button(self, button):
         self.__screen.blit(button.image, button.rect)

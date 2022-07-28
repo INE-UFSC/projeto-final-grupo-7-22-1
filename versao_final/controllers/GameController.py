@@ -7,6 +7,7 @@ from environment.World import World
 from Renderer import Renderer
 from menu_elements.MainMenu import MainMenu
 from menu_elements.ScoreMenu import ScoreMenu
+from menu_elements.GameOverMenu import GameOverMenu
 from states.MainMenuState import MainMenuState
 from states.ScoreMenuState import ScoreMenuState
 from states.GameLoopState import GameLoopState
@@ -25,8 +26,10 @@ class GameController:
         self.__world = World(width, height)
         self.__main_menu = MainMenu(height, width)
         self.__score_menu = ScoreMenu(height, width)
+        self.__game_over_menu = GameOverMenu(height, width)
         self.__screen = pygame.display.set_mode((width, height))
-        self.__renderer = Renderer(self.__world, self.__main_menu, self.__screen, self.__score_menu)
+        self.__renderer = Renderer(self.__world, self.__main_menu, self.__screen, 
+                                   self.__score_menu, self.__game_over_menu)
         self.__player_controller = PlayerCharacter(self.__world.player)
         self.__clock = pygame.time.Clock()
         self.FPS = 60
@@ -63,21 +66,25 @@ class GameController:
 
     def game_over_loop(self):
         self.__clock.tick(self.FPS)
-
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.display.quit()
                 pygame.quit()
                 exit()
             elif event.type == pygame.KEYDOWN:
-                self.world.reset()
-                self.player_controller.char = self.world.player
-                self.player_controller.init_keyboard()
-                self.FPS = 60
-                if event.key == pygame.K_ESCAPE:
-                    return "menu"
-                else:
+                if event.key == pygame.K_RETURN:
+                    self.world.reset(self.__game_over_menu.text_lines[1].text_input)
+                    self.player_controller.char = self.world.player
+                    self.player_controller.init_keyboard()
+                    self.FPS = 60
                     return "start"
+                elif event.key == pygame.K_BACKSPACE:
+                    self.__game_over_menu.change_text('del')
+                else:
+                    self.__game_over_menu.change_text(event.unicode)
+        self.__renderer.draw_game_over_menu()
+        pygame.display.update()
+
 
     def main_menu_loop(self):
         self.__main_menu.state_Exec()
