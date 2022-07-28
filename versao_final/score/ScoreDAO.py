@@ -11,17 +11,17 @@ class ScoreDAO(DAO):
 
     def add(self, score):
         if ((score is not None) and isinstance(score, Score)
-           and isinstance(score.points, int)):
-            if score not in super().get_all():
-                super().add(score.name, score)
-            else:
-                s = super().get(score.name)
-                if s and s.points < score.points:
-                    super().add(score.name, score)
-
+            and isinstance(score.points, int)):
             if len(super().get_all()) > 10:
-                s = min([sc.points for sc in super().get_all()])
-                super().remove(s.name)
+                min_score = score
+                for sc in super().get_all():
+                    if sc.points < min_score.points:
+                        min_score = sc
+                if min_score != score:
+                    super().remove(id(min_score))
+                    super().add(id(score), score)
+            else:
+                super().add(id(score), score)
 
     def get(self, name):
         if isinstance(name, str):
