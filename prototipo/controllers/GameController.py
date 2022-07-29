@@ -7,6 +7,8 @@ from environment.World import World
 from Renderer import Renderer
 from menu_elements.MainMenu import MainMenu
 from menu_elements.ScoreMenu import ScoreMenu
+from menu_elements.InputText import TextBox
+
 
 class GameController:
     def __init__(self, width: int, height: int):
@@ -14,12 +16,19 @@ class GameController:
         self.__world = World(width, height)
         self.__main_menu = MainMenu(height, width)
         self.__score_menu = ScoreMenu(height, width)
+        self.__textmenu = TextBox(None, None, None, None)
         self.__screen = pygame.display.set_mode((width, height))
-        self.__renderer = Renderer(self.__world, self.__main_menu, self.__screen, self.__score_menu)
+        self.__renderer = Renderer(
+            self.__world,
+            self.__main_menu,
+            self.__screen,
+            self.__score_menu,
+            self.__textmenu,
+        )
         self.__player_controller = PlayerCharacter(self.__world.player)
         self.__clock = pygame.time.Clock()
         self.FPS = 60
-        
+
     def game_loop(self):
         self.__clock.tick(self.FPS)
         self.FPS += 0.005
