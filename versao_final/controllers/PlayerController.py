@@ -40,15 +40,15 @@ class PlayerCharacter:
                 self.keyboard['space'] = False
 
     def update_char(self):
-        if self.keyboard['a']:
-            self.char.update_movement('l')
-        elif self.keyboard['d']:
-            self.char.update_movement('r')
 
         if self.keyboard['space'] == True:
             self.char.increase_jump_force()
         else:
             self.char.jump()
+            if self.keyboard['a']:
+                self.char.update_movement('l')
+            elif self.keyboard['d']:
+                self.char.update_movement('r')
     
     def init_keyboard(self):
         self.__keyboard = {

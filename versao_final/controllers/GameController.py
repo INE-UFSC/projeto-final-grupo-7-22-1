@@ -74,7 +74,7 @@ class GameController:
                     return "start"
                 elif event.key == pygame.K_BACKSPACE:
                     self.__game_over_menu.change_text('del')
-                else:
+                elif event.unicode.isalpha() or event.unicode.isnumeric():
                     self.__game_over_menu.change_text(event.unicode)
         self.__game_over_menu.draw(self.__screen)
         pygame.display.update()

@@ -127,16 +127,12 @@ class World:
         self.player.move()  # Move player
 
         # Check for collision
-        hit = self.__check_collisions()
-        if hit is False:
+        hit_plataform = self.__check_collisions()
+        if hit_plataform is False:
             self.player.hasCollided = False  # Player didn't collide
         else:
-            # Moves player to top of plataform
-            if self.player.y + self.player.height - self.player.vy <= hit.y + 5:
-                self.player.hasCollided = True  # Player collided
-                self.player.set_pos(
-                    0, -((self.player.y + self.player.height) - hit.y))
-                hit.player_collision(self.player)
+            #Treats player collision
+            hit_plataform.player_collision(self.player)
 
         # Stop player from leave to the left or right of the screen
         if self.player.x + self.player.width >= (self.dimension[0] - const_single.wall_bound):
@@ -167,6 +163,8 @@ class World:
     def reset(self, name):
         self.__init_regions()
         self.__init_player()
+        if name == '':
+            name = "player"
         self.__score.name = name
         self.__scoreDAO.add(self.__score)
         self.__score = Score(self.__score.name)

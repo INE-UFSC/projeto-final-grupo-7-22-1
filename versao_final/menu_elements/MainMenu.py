@@ -37,6 +37,7 @@ class MainMenu(AbstractMenu):
             )
         ]
         self.__state = 0
+        self.update_buttons()
 
     @property
     def buttons(self):
