@@ -10,7 +10,7 @@ from score.ScoreDAO import ScoreDAO
 from menu_elements.TextBox import TextBox
 
 class World:
-    def __init__(self, width: int, height: int, name = "player"):
+    def __init__(self, width: int, height: int):
         self.__dimension = (width, height) # Screen dimensions
         self.__col_module = Collision() # Collision Module
         self.__world_vel = const_single.world_vel
@@ -87,7 +87,6 @@ class World:
                         return obj
         return False
 
-
     # Update regions positions
     def __update_regions(self):
         # Update position
@@ -158,7 +157,6 @@ class World:
                     screen.blit(actor.image, actor.rect)
         screen.blit(self.player.image, self.player.rect)
         screen.blit(self.score_text.text, self.score_text.text_rect)
-
 
     def reset(self, name):
         self.__init_regions()
