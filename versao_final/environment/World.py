@@ -153,6 +153,17 @@ class World:
             return True
         return False
 
+    def draw(self, screen):
+        screen.blit(path_single.background, screen.get_rect())
+
+        for region in self.regions:
+            for step in region.objects:
+                for actor in step:
+                    screen.blit(actor.image, actor.rect)
+        screen.blit(self.player.image, self.player.rect)
+        screen.blit(self.score_text.text, self.score_text.text_rect)
+
+
     def reset(self, name):
         self.__init_regions()
         self.__init_player()

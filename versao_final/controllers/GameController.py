@@ -1,10 +1,6 @@
 import pygame
-from entities.Character import Character
 from controllers.PlayerController import PlayerCharacter
-from entities.Plataform import PLATAFORM_TYPE
-from entities.BasicPlataform import BasicPlataform
 from environment.World import World
-from Renderer import Renderer
 from menu_elements.MainMenu import MainMenu
 from menu_elements.ScoreMenu import ScoreMenu
 from menu_elements.GameOverMenu import GameOverMenu
@@ -24,12 +20,10 @@ class GameController:
         }
         self.__current_state = self.__states["menu"]
         self.__world = World(width, height)
-        self.__main_menu = MainMenu(height, width)
-        self.__score_menu = ScoreMenu(height, width)
-        self.__game_over_menu = GameOverMenu(height, width)
+        self.__main_menu = MainMenu(width, height)
+        self.__score_menu = ScoreMenu(width, height)
+        self.__game_over_menu = GameOverMenu(width, height)
         self.__screen = pygame.display.set_mode((width, height))
-        self.__renderer = Renderer(self.__world, self.__main_menu, self.__screen, 
-                                   self.__score_menu, self.__game_over_menu)
         self.__player_controller = PlayerCharacter(self.__world.player)
         self.__clock = pygame.time.Clock()
         self.FPS = 60
@@ -59,7 +53,7 @@ class GameController:
 
         self.player_controller.update_char()
         self.world.update_world()
-        self.__renderer.draw_game()
+        self.__world.draw(self.__screen)
         pygame.display.update()
         if self.world.check_defeat_conditions():
             return "game-over"
@@ -73,7 +67,7 @@ class GameController:
                 exit()
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RETURN:
-                    self.world.reset(self.__game_over_menu.text_lines[1].text_input)
+                    self.world.reset(self.__game_over_menu.input_text())
                     self.player_controller.char = self.world.player
                     self.player_controller.init_keyboard()
                     self.FPS = 60
@@ -82,13 +76,13 @@ class GameController:
                     self.__game_over_menu.change_text('del')
                 else:
                     self.__game_over_menu.change_text(event.unicode)
-        self.__renderer.draw_game_over_menu()
+        self.__game_over_menu.draw(self.__screen)
         pygame.display.update()
 
 
     def main_menu_loop(self):
-        self.__main_menu.state_Exec()
-        self.__renderer.draw_main_menu()
+        self.__main_menu.update_buttons
+        self.__main_menu.draw(self.__screen)
         self.__clock.tick(self.FPS)
         pygame.display.update()
         for event in pygame.event.get():
@@ -113,7 +107,7 @@ class GameController:
 
     def score_menu_loop(self):
         self.__score_menu.update_score_text(self.__world.scoreDAO.get_all())
-        self.__renderer.draw_score_menu()
+        self.__score_menu.draw(self.__screen)
         self.__clock.tick(self.FPS)
         pygame.display.update()
         for event in pygame.event.get():
