@@ -12,7 +12,7 @@ class ScoreDAO(DAO):
     def add(self, score):
         if ((score is not None) and isinstance(score, Score)
             and isinstance(score.points, int)):
-            # Verifica se a mais de 10 pontuações salvas
+            # Verifica se há mais de 10 pontuações salvas
             if len(super().get_all()) > 10:
                 # Determina menor pontução
                 min_score = score

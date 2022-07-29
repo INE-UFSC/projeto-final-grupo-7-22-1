@@ -8,7 +8,10 @@ class Path_Singleton:
         self.resources = os.path.dirname(__file__)
         self.assets = os.path.join(self.resources, "assets")
 
-        self.background = pg.image.load(os.path.join(self.assets, "background.png"))
+        self.logo = pg.image.load(os.path.join(self.assets, "logo.png"))
+        self.logo = pg.transform.scale(self.logo, (564,256))
+        
+        self.background = pg.image.load(os.path.join(self.assets, "background_variation.png"))
         self.background = pg.transform.scale(self.background, (800,600))
 
         self.scoreboard = pg.image.load(os.path.join(self.assets, "scoreboard_background.png"))

@@ -7,11 +7,14 @@ class MainMenu(AbstractMenu):
     def __init__(self, width, height):
         super().__init__(width, height)
 
+        self.__logo_rect = path_single.logo.get_rect()
+        self.__logo_rect.center = (self.width / 2, self.height / 3)
+
         self.__buttons = [
             Button(
                 path_single.button,
                 path_single.button2,
-                [height / 4, width / 2],
+                [width / 2, height / 2 + 80],
                 "START",
                 const_single.button_font,
                 const_single.color_button_unselected,
@@ -20,7 +23,7 @@ class MainMenu(AbstractMenu):
             Button(
                 path_single.button,
                 path_single.button2,
-                [height / 4, width / 2 + 60],
+                [width / 2, height / 2 + 140],
                 "SCORE",
                 const_single.button_font,
                 const_single.color_button_unselected,
@@ -29,7 +32,7 @@ class MainMenu(AbstractMenu):
             Button(
                 path_single.button,
                 path_single.button2,
-                [height / 4, width / 2 + 120],
+                [width / 2, height / 2 + 200],
                 "QUIT",
                 const_single.button_font,
                 const_single.color_button_unselected,
@@ -64,6 +67,7 @@ class MainMenu(AbstractMenu):
 
     def draw(self, screen):
         screen.blit(path_single.background, screen.get_rect())
+        screen.blit(path_single.logo, self.__logo_rect)
         for button in self.buttons:
             screen.blit(button.image, button.rect)
             screen.blit(button.text, button.text_rect)
