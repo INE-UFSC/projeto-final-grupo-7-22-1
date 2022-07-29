@@ -1,6 +1,8 @@
 import pygame as pg
 import os
 
+
+# Contem paths e imagens utilizados no jogo
 class Path_Singleton:
     def __init__(self):
         self.resources = os.path.dirname(__file__)

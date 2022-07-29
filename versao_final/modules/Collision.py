@@ -1,7 +1,9 @@
-import os.path
+
+
 import pygame
 
 
+# Contem funções para verificação de colisão
 class Collision:
     def Hit(self, player, plataform):
         Hit_Boolean = pygame.sprite.spritecollide(player, plataform, False)

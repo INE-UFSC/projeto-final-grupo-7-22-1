@@ -11,11 +11,12 @@ from menu_elements.TextBox import TextBox
 
 class World:
     def __init__(self, width: int, height: int):
-        self.__dimension = (width, height) # Screen dimensions
-        self.__col_module = Collision() # Collision Module
-        self.__world_vel = const_single.world_vel
-        self.__score = Score("player") # Active player score
+        self.__dimension = (width, height) # Dimensão da tela
+        self.__col_module = Collision() # Modulo de colisão
+        self.__world_vel = const_single.world_vel # Velocidade de movimento do mundo
+        self.__score = Score("player") # Pontuação do jogador
         self.__scoreDAO = ScoreDAO()
+        # Texto de score na tela
         self.__score_text = TextBox(path_single.button, (0.9*self.dimension[0], 0.1*self.dimension[1]), 
                                     str(self.__score.points), const_single.text_font, const_single.color_button_unselected)
         self.__init_player()
@@ -45,11 +46,11 @@ class World:
     def score_text(self):
         return self.__score_text
 
-    # Initializes player
+    # Inicializa jogador
     def __init_player(self):
         self.__player = Character((self.__dimension[0]/2, self.__dimension[1]/2), path_single.character_idle)
 
-    # Initializes regions
+    # Inicializa regiões
     def __init_regions(self):
         self.__regions = [
                 Region(
@@ -76,8 +77,8 @@ class World:
         
         self.score.increase_score(1)
 
-    # Check collision for each plataform
-    # @Return plataform if a collision happened
+    # Verifica colisao com cada plataforma
+    # @Return plataforma que ocorreu colisao
     def __check_collisions(self):
         for region in self.regions:
             for step in region.objects:
@@ -87,13 +88,13 @@ class World:
                         return obj
         return False
 
-    # Update regions positions
+    # Atualiza posição das regiões
     def __update_regions(self):
-        # Update position
+        # Atualiza posição
         for region in self.regions:
             region.update_region(self.__world_vel)
         
-        # Check if new region is necessary
+        # Verifica se nova regiao é necessaria
         if self.regions[0].offset > 2 * self.dimension[1]:
             self.regions.pop(0)
             j = randint(1, const_single.preset_amount)
@@ -105,35 +106,34 @@ class World:
                     self.regions[-1].offset - self.dimension[1])
             )
 
-    # Move all elements in the world down
+    # Move todos elementos no mundo
     def __move_world(self):
-        # Speed up screen movement if player is to close to the top
+        # Acelera movimento da tela se jogador esta muito perto do topo
         if self.player.y < const_single.upper_limit:
             self.__world_vel += 1
         else:
             self.__world_vel = const_single.world_vel
 
-        # Updates region positions
         self.__update_regions()
 
-        # Moves player down
+        # Move jogador para baixo
         self.player.set_pos(0, self.__world_vel)
 
     def __check_player_collision(self):
-        # If player is not in a plataform
+        # Se jogador não estiver em uma plataforma
         if not self.player.hasCollided:
-            self.player.fall()  # Updates fall velocity
-        self.player.move()  # Move player
+            self.player.fall()  # Atualiza velocidade de queda
+        self.player.move()
 
-        # Check for collision
+        # Checa por colisões
         hit_plataform = self.__check_collisions()
         if hit_plataform is False:
-            self.player.hasCollided = False  # Player didn't collide
+            self.player.hasCollided = False  # Jogador nao colidiu
         else:
-            #Treats player collision
+            #Trata colisão do jogador
             hit_plataform.player_collision(self.player)
 
-        # Stop player from leave to the left or right of the screen
+        # Impede jogador de sair pela esquerda ou direita da tela
         if self.player.x + self.player.width >= (self.dimension[0] - const_single.wall_bound):
             self.player.set_pos(
                 self.dimension[0] - (self.player.x + self.player.width + const_single.wall_bound), 0
@@ -148,6 +148,8 @@ class World:
             return True
         return False
 
+    # Desenha mundo na tela
+    # @param screen -> tela na qual sera desenhada o mundo
     def draw(self, screen):
         screen.blit(path_single.background, screen.get_rect())
 
@@ -158,6 +160,8 @@ class World:
         screen.blit(self.player.image, self.player.rect)
         screen.blit(self.score_text.text, self.score_text.text_rect)
 
+    # Reseta mundo
+    # @param name -> Nome da pontuação a ser salva
     def reset(self, name):
         self.__init_regions()
         self.__init_player()

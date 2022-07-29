@@ -42,10 +42,7 @@ class Button:
     def change_Color(self):
         self.__image = self.__image2
         self.__text = self.__font.render(self.__text_input, True, self.__hovering_color)
-
     
     def og_Color(self):
         self.__image = self.__image1
         self.__text = self.__font.render(self.__text_input, True, self.__base_color)
-    
-#def menu_Button_Style(self):

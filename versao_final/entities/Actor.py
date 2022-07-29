@@ -4,29 +4,28 @@ from abc import ABC
 from abc import abstractmethod
 import pygame
 
-
-#Class actor abstracts implementation of any physical object in the world
-#Inherits pygame Sprite class
+# Abstrai implementação de qualquer objeto fisico no mundo
+# Herda classe Sprite do pygame
 class Actor(ABC, pygame.sprite.Sprite):
     def __init__(self, pos: tuple, img: str):
         super().__init__()
         
-        # Attributes
-        # Position (x, y)
+        # Atributos
+        # Posição (x, y)
         self.__x = pos[0]
         self.__y = pos[1]
-        # Velocity vectors (x, y)
+        # Vetores velocidade (x, y)
         self.__vx = 0 
         self.__vy = 0
 
-        #Rectangle representation
-        self.__image = img # Sprite Image
-        self.__rect = self.image.get_rect() #Pygame rect object generated from sprite
-        self.__rect.move_ip(*pos) # Sets intial position of rect
+        # Representação do retangulo
+        self.__image = img # Imagem do sprite
+        self.__rect = self.image.get_rect() # Objeto rect do Pygame gerado a partir do sprite
+        self.__rect.move_ip(*pos) # Configura posicão inicial do retangulo
 
-        self.__width, self.__height = self.__image.get_size() # Set size according to sprite dimension
+        self.__width, self.__height = self.__image.get_size() # Configura tamanho de acordo com as dimensoes do sprite
 
-    # Getters and Setters
+    # Getters e Setters
     @property
     def x(self):
         return self.__x
@@ -79,12 +78,12 @@ class Actor(ABC, pygame.sprite.Sprite):
     def rect(self):
         return self.__rect
 
-    # Updates position
+    # Atualiza posição
     @abstractmethod
     def move(self):
         pass
 
-    # Updates velocity vectors
+    # Atualiza vetores de velocidade
     @abstractmethod
     def update_movement(self):
         pass

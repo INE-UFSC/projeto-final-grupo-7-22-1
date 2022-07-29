@@ -19,7 +19,7 @@ class IcePlataform(Plataform):
     
     def player_collision(self, player):
         if player.y + player.height - player.vy <= self.y + 5:
-            player.hasCollided = True  # Player collided
+            player.hasCollided = True
             player.set_pos(
                 0, -((player.y + player.height) - self.y))
             player.update_movement('s', 0.25)

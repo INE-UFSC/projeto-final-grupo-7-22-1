@@ -67,8 +67,3 @@ class MainMenu(AbstractMenu):
         for button in self.buttons:
             screen.blit(button.image, button.rect)
             screen.blit(button.text, button.text_rect)
-
-###---------TODO----------------###
-
-###Abstract class menu, para fazer o menu do dao, menu do esc e menu inicial.
-###Essa classe vai ser desenhada no Drawn

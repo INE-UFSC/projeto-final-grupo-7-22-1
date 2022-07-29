@@ -34,6 +34,7 @@ class Region:
                 temp_plat.append(PlatafromCreator.create_plataform((width*(int(xpos)/100), ypos), choices(types, [t.value for t in types], k= 1)[0]))
             self.objects.append(temp_plat)
     
+    # Atualiza posição da região
     def update_region(self, vy):
         self.offset += vy
         for step in self.objects:

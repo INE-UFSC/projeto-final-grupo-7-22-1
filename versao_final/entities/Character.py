@@ -2,18 +2,18 @@ from entities.Actor import Actor
 from ConstantSingleton import const_single
 from PathSingleton import path_single
 
-# Class Character implements especialization from actor to a character controlled by the player 
+# Implementa especialização do ator para um personagem 
 class Character(Actor):
     def __init__(self, pos: tuple, img):
         super().__init__(pos, img)
 
-        #Attributes
-        self.__hasCollided = False # True if character has collided with any other object
+        # Atributos
+        self.__hasCollided = False # Verdade quando jogador colidiu com outro ator
         self.__running = False
         self.__preparing_jump = False
-        self.__jump_strengh = 0.0 # Percentage of total jump strengh
+        self.__jump_strengh = 0.0 # Porcentagem da força total do pulo
 
-    #Getters and Setters
+    #Getters e Setters
     @property
     def jump_strengh(self):
         return self.__jump_strengh
@@ -30,7 +30,7 @@ class Character(Actor):
     def hasCollided(self, cond):
         self.__hasCollided = cond
 
-    # Updates vector x depending on given direction 
+    # Atualiza vetor x dependenfo da direção informado e constante de "fricção" 
     def update_movement(self, dir: str, friction = const_single.friction_const):
         if dir == "r":
             self.vx = const_single.char_movement
@@ -49,7 +49,7 @@ class Character(Actor):
         else:
             print("Direction parameter must be 'r', 'l' or 's'")
 
-    # Increase strengh of jump
+    # Aumento força do pulo
     def increase_jump_force(self):
         if self.hasCollided:
             if self.jump_strengh == 0:
@@ -58,14 +58,14 @@ class Character(Actor):
                 self.jump_strengh += const_single.jump_strengh_increase
             self.__preparing_jump = True
 
-    # Increases vector y according to jump strengh
+    # Aumenta vetor y de acordo com a força do pulo
     def jump(self):
         if self.hasCollided:
             self.vy -= const_single.jump_speed * self.jump_strengh
             self.jump_strengh = 0
             self.__preparing_jump = False
 
-    # Updates fall speed
+    # Atualiza velocidade de queda
     def fall(self):
         self.vy += const_single.gravity
 

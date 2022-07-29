@@ -1,9 +1,10 @@
-import pygame
+from pygame.event import Event
 from pygame.locals import *
 from entities.Character import Character
 
 class PlayerCharacter:
     def __init__(self, char: Character):
+        # Personagem sendo controlado
         self.__char = char
         self.init_keyboard()
 
@@ -19,7 +20,8 @@ class PlayerCharacter:
     def keyboard(self):
         return self.__keyboard
 
-    def update_keyboard(self, event: pygame.event.Event):
+    # Recebe evento e analiza qual teclas foram pressionadas
+    def update_keyboard(self, event: Event):
         type = event.type
         key = event.key
         if type == KEYDOWN:
@@ -39,8 +41,9 @@ class PlayerCharacter:
             elif key == K_SPACE:
                 self.keyboard['space'] = False
 
+    # Atualiza movimento do personagem de acordo com teclas pressionadas
     def update_char(self):
-
+        
         if self.keyboard['space'] == True:
             self.char.increase_jump_force()
         else:

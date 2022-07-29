@@ -1,6 +1,7 @@
 from pygame import font, Color
 
 
+# Contem constantes, fontes e cores utilizadas no jogo
 class ConstantSingleton:
     def __init__(self):
         #Screen size
@@ -21,7 +22,7 @@ class ConstantSingleton:
         self.text_font_small = font.Font(font.get_default_font(), self.text_font_size_small)
 
         #World properties
-        self.world_vel = 2
+        self.world_vel = 1
         self.wall_bound = 30
         self.defeat_condition_multiplier = 1.5
         self.upper_limit = 50

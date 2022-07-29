@@ -5,6 +5,7 @@ from entities.IcePlataform import IcePlataform
 from entities.Plataform import PLATAFORM_TYPE
 from PathSingleton import path_single
 
+# Retorna plataforma de acordo com o tipo informado
 class PlatafromCreator:
     def create_plataform(pos: tuple, type: PLATAFORM_TYPE):
         w = {

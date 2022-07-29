@@ -19,14 +19,7 @@ class Plataform(Actor):
     def type(self):
         return self.__type
 
-    @abstractmethod
-    def update_movement(self, vx, vy):
-        pass
-        
-    @abstractmethod
-    def move(self):
-        pass
-
+    # Tratamento da colisão com player
     @abstractmethod
     def player_collision(self, player):
         pass

@@ -36,6 +36,3 @@ class TextBox:
         self.__text_input = text_input
         self.__text = self.__font.render(self.__text_input, True, self.__base_color)
         self.__text_rect = self.__text.get_rect(center=(self.__x_pos, self.__y_pos))
-
-
-#def menu_Button_Style(self):

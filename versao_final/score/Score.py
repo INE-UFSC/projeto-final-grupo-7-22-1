@@ -20,5 +20,7 @@ class Score:
     def points(self):
         return self.__points
 
+    # Aumenta pontuação
+    # @param inc -> Determina aumento da pontuação
     def increase_score(self, inc: int):
         self.__points += inc
